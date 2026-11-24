@@ -1,0 +1,14 @@
+{
+  "name": "subastas-catalunya",
+  "private": true,
+  "description": "Radar de subastas inmobiliarias en Catalunya",
+  "scripts": {
+    "map": "node scripts/prep-map.mjs",
+    "dev": "npx serve ."
+  },
+  "devDependencies": {
+    "d3-geo": "^3.1.1",
+    "es-atlas": "0.6.0",
+    "topojson-client": "^3.1.0"
+  }
+}

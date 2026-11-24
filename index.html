@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar de Subastas Catalunya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/*
+VOICE: herramienta de trabajo de inversor, sobria y precisa, como un plano catastral anotado.
+IDEA: una hoja de plano de Catalunya con chinchetas de color sobre cada subasta, y una ficha de análisis por inmueble.
+PICTURE: el mapa de las cuatro provincias con los municipios trazados finos y los inmuebles como chinchetas por riesgo.
+COLOUR and TYPE: papel blanco roto, tinta casi negra, cobalto para acciones; verde/ámbar/rojo solo para riesgo. Archivo + Inter.
+LAYOUT: barra superior, mapa a la izquierda y lista filtrable a la derecha; ficha en panel completo con cálculo en vivo.
+*/
+:root{color-scheme:light dark;
+--bg:light-dark(#f5f5f1,#0f1113);--card:light-dark(#ffffff,#181b1e);--ink:light-dark(#15171a,#e9eaea);--mute:light-dark(#5e646b,#9aa1a8);
+--line:light-dark(#dfe0da,#2a2e33);--acc:light-dark(#1f47c7,#7c9cff);--accInk:light-dark(#fff,#0b1020);
+--p08:light-dark(#e9e6da,#1d2124);--p17:light-dark(#e3e8dc,#1a2220);--p25:light-dark(#ece4d8,#221f1b);--p43:light-dark(#e2e5e9,#1b1f25);
+--ok:light-dark(#23804f,#4cc489);--mid:light-dark(#c07a00,#f0b445);--bad:light-dark(#c2352b,#ff7a6e);--sea:light-dark(#eef1f3,#0c0f12)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Archivo,Inter,sans-serif;line-height:1.1;margin:0;text-wrap:balance}
+h1{font-size:clamp(22px,3vw,30px)}h2{font-size:22px}h3{font-size:16px}
+a{color:var(--acc)}
+button,select,input,textarea{font:inherit;color:inherit}
+.btn{min-height:40px;padding:8px 14px;border-radius:9px;border:1px solid var(--line);background:var(--card);cursor:pointer;white-space:nowrap}
+.btn.pri{background:var(--acc);color:var(--accInk);border-color:var(--acc);font-weight:600}
+.btn.ghost{background:transparent}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+header{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;padding:16px max(3vw,14px);border-bottom:1px solid var(--line);background:var(--card)}
+header .sub{color:var(--mute);font-size:13px;margin-top:4px}
+header .acts{display:flex;flex-wrap:wrap;gap:8px}
+.banner{margin:12px max(3vw,14px) 0;padding:10px 14px;border-radius:9px;background:light-dark(#fff4dc,#2b2414);font-size:14px;display:none}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border-bottom:1px solid var(--line)}
+.kpi{background:var(--card);padding:12px max(1.5vw,12px)}.kpi b{display:block;font:600 22px Archivo,sans-serif;white-space:nowrap}.kpi span{font-size:13px;color:var(--mute)}
+main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0;align-items:start}
+.mapwrap{position:sticky;top:0;height:calc(100vh - 0px);max-height:900px;min-height:420px;border-right:1px solid var(--line);background:var(--sea)}
+#map{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
+#map.pick{cursor:crosshair}
+.mapctl{position:absolute;right:12px;top:12px;display:flex;flex-direction:column;gap:6px}
+.mapctl .btn{width:44px;padding:0;font-size:18px}
+.legend{position:absolute;left:12px;bottom:12px;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:8px 12px;font-size:13px;display:flex;gap:12px;flex-wrap:wrap}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.pickmsg{position:absolute;left:50%;top:12px;transform:translateX(-50%);background:var(--acc);color:var(--accInk);padding:8px 14px;border-radius:9px;font-weight:600;display:none}
+#tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:13px;padding:5px 9px;border-radius:7px;display:none;max-width:240px}
+.side{padding:14px max(2vw,14px) 40px}
+.filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.filters input,.filters select,.f input,.f select,.f textarea{width:100%;min-height:40px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-size:15px}
+.count{font-size:13px;color:var(--mute);margin:4px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px;cursor:pointer;transition:border-color .15s}
+.card:hover,.card.sel{border-color:var(--acc)}
+.card .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.card .meta{font-size:13px;color:var(--mute);margin-top:3px}
+.price{font:600 18px Archivo,sans-serif;white-space:nowrap;text-align:right}
+.price small{display:block;font:400 12px Inter,sans-serif;color:var(--mute)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.tag{font-size:12px;padding:3px 8px;border-radius:99px;border:1px solid var(--line);white-space:nowrap}
+.tag.r0{border-color:var(--ok);color:var(--ok)}.tag.r1{border-color:var(--mid);color:var(--mid)}.tag.r2{border-color:var(--bad);color:var(--bad)}
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;border-top:1px solid var(--line);padding-top:10px}
+.nums div{font-size:12px;color:var(--mute)}.nums b{display:block;font:600 16px Archivo,sans-serif;color:var(--ink);white-space:nowrap}
+.cardacts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.cardacts .btn{min-height:36px;padding:6px 12px;font-size:14px}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:28px;text-align:center}
+.empty p{color:var(--mute)}
+/* panel */
+.ov{position:fixed;inset:0;background:rgb(0 0 0/.45);display:none;z-index:20;overflow:auto}
+.ov.on{display:block}
+.panel{background:var(--bg);max-width:1180px;margin:3vh auto;border-radius:14px;border:1px solid var(--line);overflow:hidden}
+.phead{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 18px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2;flex-wrap:wrap}
+.phead .acts{display:flex;gap:8px;flex-wrap:wrap}
+.pbody{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px;padding:18px}
+fieldset{border:1px solid var(--line);border-radius:12px;padding:12px 14px 14px;margin:0 0 14px;background:var(--card)}
+legend{font:600 15px Archivo,sans-serif;padding:0 6px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.f label{display:block;font-size:13px;color:var(--mute);margin-bottom:3px}
+.f.w2{grid-column:span 2}.f.w3{grid-column:1/-1}
+.f textarea{min-height:80px;resize:vertical}
+.hint{font-size:12px;color:var(--mute);margin-top:3px}
+.res{position:sticky;top:76px}
+.big{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+.big .hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.big .hero b{display:block;font:700 clamp(28px,3.4vw,40px)/1.05 Archivo,sans-serif;white-space:nowrap}
+.big .hero span{font-size:13px;color:var(--mute)}
+.rows{margin-top:12px;border-top:1px solid var(--line)}
+.row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
+.row b{white-space:nowrap;font-variant-numeric:tabular-nums}
+.row.tot{font-weight:600;border-bottom:0}
+.meter{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}
+.meter i{display:block;height:100%}
+.factors{font-size:13px;color:var(--mute);margin:6px 0 0;padding-left:18px}
+.contact{display:grid;grid-template-columns:repeat(5,minmax(0,1fr)) 44px;gap:6px;margin-bottom:6px}
+.contact input,.contact select{width:100%;min-height:40px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-size:14px}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.ai{font-size:14px;white-space:pre-wrap;background:var(--bg);border-radius:8px;padding:10px;margin-top:8px;display:none}
+.src a{display:block;padding:10px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.src a span{display:block;font-size:13px;color:var(--mute)}
+.small{max-width:640px}
+pre{overflow-x:auto}
+textarea.io{width:100%;min-height:180px;font:13px ui-monospace,monospace;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:9px;z-index:40;display:none}
+@media(max-width:900px){main{grid-template-columns:1fr}.mapwrap{position:relative;height:56vh;border-right:0;border-bottom:1px solid var(--line)}.pbody{grid-template-columns:1fr}.res{position:static}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.filters{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr 1fr}.nums{grid-template-columns:1fr 1fr}.contact{grid-template-columns:1fr 1fr}.panel{margin:0;border-radius:0}.f.w2{grid-column:1/-1}}
+@media(prefers-reduced-motion:no-preference){.pin{transition:r .15s}}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Radar de Subastas · Catalunya</h1><div class="sub" id="who">Subastas judiciales, administrativas y de bancos, analizadas en un solo sitio</div></div>
+  <div class="acts">
+    <button class="btn pri" id="bNew">+ Nuevo inmueble</button>
+    <button class="btn" id="bSrc">Dónde buscar</button>
+    <button class="btn" id="bSet">Supuestos</button>
+    <button class="btn" id="bIO">Exportar / importar</button>
+  </div>
+</header>
+<div class="banner" id="banner"></div>
+<section class="kpis">
+  <div class="kpi"><b id="k1">0</b><span>inmuebles en seguimiento</span></div>
+  <div class="kpi"><b id="k2">–</b><span>inversión total estimada</span></div>
+  <div class="kpi"><b id="k3">–</b><span>mejor rentabilidad neta</span></div>
+  <div class="kpi"><b id="k4">–</b><span>próxima subasta que cierra</span></div>
+</section>
+<main>
+  <div class="mapwrap">
+    <svg id="map" role="img" aria-label="Mapa de Catalunya con los inmuebles guardados"></svg>
+    <div class="mapctl"><button class="btn" id="zIn" aria-label="Acercar">+</button><button class="btn" id="zOut" aria-label="Alejar">−</button><button class="btn" id="zRe" aria-label="Ver toda Catalunya">⤢</button></div>
+    <div class="legend"><span><i class="dot" style="background:var(--ok)"></i>Riesgo bajo</span><span><i class="dot" style="background:var(--mid)"></i>Medio</span><span><i class="dot" style="background:var(--bad)"></i>Alto</span></div>
+    <div class="pickmsg" id="pickmsg">Haz clic en el mapa para situar el inmueble</div>
+    <div id="tip"></div>
+  </div>
+  <div class="side">
+    <div class="filters">
+      <input id="fQ" placeholder="Buscar municipio, título, ref…" aria-label="Buscar">
+      <select id="fProv" aria-label="Provincia"><option value="">Todas las provincias</option><option>Barcelona</option><option>Girona</option><option>Lleida</option><option>Tarragona</option></select>
+      <select id="fRisk" aria-label="Riesgo"><option value="">Cualquier riesgo</option><option value="0">Riesgo bajo</option><option value="1">Riesgo medio</option><option value="2">Riesgo alto</option></select>
+      <input id="fMax" type="number" inputmode="numeric" placeholder="Precio máx. €" aria-label="Precio máximo">
+      <select id="fEst" aria-label="Estado del proceso"></select>
+      <select id="fSort" aria-label="Ordenar">
+        <option value="fin">Orden: cierre más próximo</option><option value="neta">Mayor rentabilidad neta</option><option value="flip">Mayor margen en venta</option>
+        <option value="desc">Mayor descuento</option><option value="precio">Precio más bajo</option><option value="riesgo">Menor riesgo</option></select>
+    </div>
+    <div class="count" id="count"></div>
+    <div id="list"></div>
+  </div>
+</main>
+
+<div class="ov" id="ovEd"><div class="panel" role="dialog" aria-modal="true" aria-labelledby="edTitle">
+  <div class="phead"><h2 id="edTitle">Inmueble</h2><div class="acts">
+    <button class="btn" id="bAI">Valorar con Claude</button><button class="btn ghost" id="bDel">Eliminar</button><button class="btn" id="bCancel">Cerrar</button><button class="btn pri" id="bSave">Guardar</button></div></div>
+  <form class="pbody" id="edForm" autocomplete="off">
+    <div id="edFields"></div>
+    <div class="res" id="edRes"></div>
+  </form>
+</div></div>
+
+<div class="ov" id="ovSet"><div class="panel small" role="dialog" aria-modal="true">
+  <div class="phead"><h2>Supuestos de cálculo</h2><div class="acts"><button class="btn" data-close>Cerrar</button><button class="btn pri" id="bSaveSet">Guardar</button></div></div>
+  <div style="padding:18px"><p class="hint" style="margin-top:0">Se aplican a todos los inmuebles salvo que en la ficha pongas un valor propio. ITP Catalunya por tramos desde junio 2025: 10% hasta 600.000 €, 11% hasta 900.000 €, 12% hasta 1,5 M€, 13% el resto; 20% para grandes tenedores.</p><div class="grid" id="setFields"></div></div>
+</div></div>
+
+<div class="ov" id="ovSrc"><div class="panel small" role="dialog" aria-modal="true">
+  <div class="phead"><h2>Dónde buscar subastas</h2><div class="acts"><button class="btn" data-close>Cerrar</button></div></div>
+  <div style="padding:6px 18px 18px" class="src" id="srcList"></div>
+</div></div>
+
+<div class="ov" id="ovIO"><div class="panel small" role="dialog" aria-modal="true">
+  <div class="phead"><h2>Exportar / importar</h2><div class="acts"><button class="btn" data-close>Cerrar</button></div></div>
+  <div style="padding:18px">
+    <p class="hint" style="margin-top:0">Copia tus datos como JSON (copia de seguridad) o CSV (para Excel). Para importar, pega un JSON exportado y pulsa Importar.</p>
+    <div class="links"><button class="btn" id="bCopyJ">Copiar JSON</button><button class="btn" id="bCopyC">Copiar CSV</button><button class="btn pri" id="bImp">Importar JSON pegado</button></div>
+    <textarea class="io" id="ioTxt" placeholder="Pega aquí un JSON exportado…" style="margin-top:10px"></textarea>
+  </div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>/^https:\/\//i.test(String(u||'').trim())?String(u).trim():'';
+const eur=n=>isFinite(n)?Math.round(n).toLocaleString('es-ES')+' €':'–';
+const pct=n=>isFinite(n)?(n*100).toLocaleString('es-ES',{maximumFractionDigits:1})+' %':'–';
+const num=v=>{const n=parseFloat(String(v??'').replace(/\./g,'').replace(',','.'));return isFinite(n)?n:0};
+const toast=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',2600)};
+const PROV={'08':'Barcelona','17':'Girona','25':'Lleida','43':'Tarragona'};
+const ESTADOS=['Vigilando','Analizando','Pujar','Pujado','Ganada','Perdida','Descartada'];
+const TIPOS=['Piso','Casa / chalet','Local','Nave','Garaje / trastero','Terreno','Edificio','Otro'];
+const ORIGEN=['Judicial (BOE)','Notarial (BOE)','Hacienda / AEAT','Seguridad Social','Otra administración','Concursal','Banco / servicer','Particular / otro'];
+const REF={bueno:'Buen estado (0)',ligera:'Reforma ligera',media:'Reforma media',integral:'Reforma integral'};
+const ROLES=['Juzgado / LAJ','Administrador concursal','Notaría','Banco / servicer','Agente / API','Propietario','Abogado','Otro'];
+const DEF={pujaPct:70,gastosPct:1.5,asesor:1500,ref_ligera:250,ref_media:550,ref_integral:950,desalojo:6000,vacio:5,mant:5,seguro:250,venta:6,granTenedor:'no'};
+let S={...DEF}, P=[], GEO=null, db=null, uid=null, propsCol=null, setDoc=null, editing=null, sel=null;
+ESTADOS.forEach(e=>$('#fEst').insertAdjacentHTML('beforeend',`<option>${e}</option>`));$('#fEst').insertAdjacentHTML('afterbegin','<option value="">Cualquier estado</option>');$('#fEst').value='';
+
+/* ---------- cálculo ---------- */
+function itp(b){if(S.granTenedor==='si')return b*.20;const t=[[6e5,.10],[9e5,.11],[1.5e6,.12],[Infinity,.13]];let prev=0,tax=0;for(const[l,r]of t){if(b>prev)tax+=(Math.min(b,l)-prev)*r;prev=l}return tax}
+function calc(p){
+  const vs=num(p.valorSubasta), m2=num(p.m2);
+  const precio=num(p.puja)||vs*S.pujaPct/100;
+  const baseItp=Math.max(precio,num(p.valorRef));
+  const tax=itp(baseItp);
+  const gastos=precio*S.gastosPct/100+num(S.asesor);
+  const reforma=p.reformaManual!==''&&p.reformaManual!=null?num(p.reformaManual):m2*(p.reforma==='bueno'?0:num(S['ref_'+p.reforma]));
+  const desalojo=p.ocupacion==='ocupado'?num(S.desalojo):p.ocupacion==='desconocido'?num(S.desalojo)/2:0;
+  const cargas=num(p.cargas), deudas=num(p.deudas);
+  const inv=precio+tax+gastos+reforma+desalojo+cargas+deudas;
+  const renta=num(p.renta), rentaA=renta*12;
+  const gastosA=num(p.ibi)+num(p.comunidad)*12+num(S.seguro)+rentaA*S.mant/100;
+  const netoA=rentaA*(1-S.vacio/100)-gastosA;
+  const vm=num(p.valorMercado);
+  const plus=vm*(1-S.venta/100)-inv;
+  // riesgo
+  const f=[];const add=(v,t)=>{if(v>0)f.push([v,t])};
+  add(p.ocupacion==='ocupado'?30:p.ocupacion==='desconocido'?15:0,p.ocupacion==='ocupado'?'Ocupado: desalojo y retraso':'Ocupación desconocida');
+  add(precio?Math.min(20,Math.round(cargas/precio*100)):0,'Cargas previas que asumes');
+  add(precio?Math.min(10,Math.round(deudas/precio*60)):0,'Deudas IBI / comunidad');
+  add(p.reforma==='integral'?12:p.reforma==='media'?6:0,'Reforma importante');
+  add(p.visitado==='si'?0:8,'Sin visita interior');
+  add(p.notaSimple==='si'?0:10,'Sin nota simple / certificación de cargas revisada');
+  const desc=vm?1-precio/vm:NaN;
+  add(!vm?10:desc<.15?15:desc<.25?8:0,!vm?'Sin valor de mercado estimado':'Poco descuento sobre mercado');
+  add(/Judicial|Concursal/.test(p.origen||'')?5:0,'Procedimiento judicial / concursal');
+  const score=Math.min(100,f.reduce((a,[v])=>a+v,0));
+  const lvl=score<30?0:score<55?1:2;
+  return{precio,baseItp,tax,gastos,reforma,desalojo,cargas,deudas,inv,renta,rentaA,gastosA,netoA,bruta:rentaA/inv,neta:netoA/inv,mes:netoA/12,vm,plus,flip:vm?plus/inv:NaN,desc,score,lvl,f,deposito:vs*.05};
+}
+const LV=['Bajo','Medio','Alto'], LC=['var(--ok)','var(--mid)','var(--bad)'];
+
+/* ---------- mapa ---------- */
+const svg=$('#map');let VB0=null,vb=null;
+function proj(lo,la){const g=GEO.proj;return[(lo-g.lon0)*g.K*g.c,(g.lat0-la)*g.K]}
+function unproj(x,y){const g=GEO.proj;return[x/(g.K*g.c)+g.lon0,g.lat0-y/g.K]}
+function drawBase(){
+  const pv=GEO.prov.map(p=>`<path d="${p.d}" fill="var(--p${p.id})" stroke="var(--mute)" stroke-width="2.2" vector-effect="non-scaling-stroke"/>`).join('');
+  svg.innerHTML=`<g id="gBase">${pv}<path d="${GEO.mesh}" fill="none" stroke="var(--line)" stroke-width=".6" vector-effect="non-scaling-stroke"/></g><g id="gLab"></g><g id="gPins"></g>`;
+  const bb=$('#gBase').getBBox();const pad=40;VB0={x:bb.x-pad,y:bb.y-pad,w:bb.width+2*pad,h:bb.height+2*pad};vb={...VB0};applyVB();
+}
+const LAB=[['Barcelona',2.17,41.39],['Girona',2.82,41.98],['Lleida',0.62,41.62],['Tarragona',1.25,41.12]];
+function applyVB(){
+  svg.setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);svg.setAttribute('preserveAspectRatio','xMidYMid meet');
+  const k=unitPx();const fs=13*k;
+  $('#gLab').innerHTML=LAB.map(([n,lo,la])=>{const[x,y]=proj(lo,la);return`<text x="${x}" y="${y-10*k}" font-size="${fs}" text-anchor="middle" fill="var(--mute)" font-family="Archivo" font-weight="600" stroke="var(--bg)" stroke-width="${3*k}" paint-order="stroke">${n}</text>`}).join('');
+  drawPins();
+}
+function unitPx(){const r=svg.getBoundingClientRect();if(!r.width)return 2;return Math.max(vb.w/r.width,vb.h/r.height)}
+function drawPins(){
+  if(!GEO)return;const k=unitPx();const seen={};
+  const items=filtered();
+  $('#gPins').innerHTML=items.filter(p=>isFinite(p.lat)&&isFinite(p.lon)&&p.lat).map(p=>{
+    let[x,y]=proj(p.lon,p.lat);const key=Math.round(x/(8*k))+':'+Math.round(y/(8*k));const n=seen[key]=(seen[key]||0)+1;
+    if(n>1){const a=n*2.4;x+=Math.cos(a)*9*k*Math.sqrt(n-1);y+=Math.sin(a)*9*k*Math.sqrt(n-1)}
+    const c=calc(p);const on=sel===p.id;
+    return`<circle class="pin" data-id="${esc(p.id)}" cx="${x}" cy="${y}" r="${(on?11:7.5)*k}" fill="${LC[c.lvl]}" stroke="var(--card)" stroke-width="${2.2*k}" style="cursor:pointer"/>`}).join('');
+}
+function zoom(f,cx,cy){const nw=Math.min(VB0.w*1.2,Math.max(VB0.w/40,vb.w*f));const s=nw/vb.w;cx??=vb.x+vb.w/2;cy??=vb.y+vb.h/2;vb={x:cx-(cx-vb.x)*s,y:cy-(cy-vb.y)*s,w:nw,h:vb.h*s};applyVB()}
+function svgPt(e){const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse())}
+let drag=null,picking=false;
+svg.addEventListener('wheel',e=>{e.preventDefault();const p=svgPt(e);zoom(e.deltaY>0?1.18:1/1.18,p.x,p.y)},{passive:false});
+svg.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,vb:{...vb},moved:false};svg.setPointerCapture(e.pointerId)});
+svg.addEventListener('pointermove',e=>{
+  const pin=e.target.closest&&e.target.closest('.pin');const tip=$('#tip');
+  if(pin&&!drag){const p=P.find(x=>x.id===pin.dataset.id);if(p){const c=calc(p);tip.textContent=`${p.titulo||'Sin título'} · ${p.municipio||''} · ${eur(c.precio)} · riesgo ${LV[c.lvl].toLowerCase()}`;const r=svg.getBoundingClientRect();tip.style.left=Math.min(e.clientX-r.left+12,r.width-250)+'px';tip.style.top=(e.clientY-r.top+12)+'px';tip.style.display='block'}}else tip.style.display='none';
+  if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.abs(dx)+Math.abs(dy)>4)drag.moved=true;if(!drag.moved)return;
+  const k=unitPx();vb={...drag.vb,x:drag.vb.x-dx*k,y:drag.vb.y-dy*k};applyVB()});
+svg.addEventListener('pointerup',e=>{const d=drag;drag=null;if(d&&d.moved)return;
+  if(picking){const pt=svgPt(e);const[lo,la]=unproj(pt.x,pt.y);editing.lon=+lo.toFixed(5);editing.lat=+la.toFixed(5);picking=false;svg.classList.remove('pick');$('#pickmsg').style.display='none';$('#ovEd').classList.add('on');renderEditor();toast('Ubicación ajustada');return}
+  const pin=e.target.closest&&e.target.closest('.pin');if(pin)openEd(pin.dataset.id)});
+svg.addEventListener('pointerleave',()=>$('#tip').style.display='none');
+$('#zIn').onclick=()=>zoom(1/1.5);$('#zOut').onclick=()=>zoom(1.5);$('#zRe').onclick=()=>{vb={...VB0};applyVB()};
+const ro=new ResizeObserver(()=>{if(vb)applyVB()});ro.observe(svg);
+
+/* ---------- lista ---------- */
+function filtered(){
+  const q=$('#fQ').value.trim().toLowerCase(),pr=$('#fProv').value,rk=$('#fRisk').value,mx=num($('#fMax').value),es=$('#fEst').value;
+  return P.filter(p=>{const c=calc(p);
+    if(q&&!`${p.titulo} ${p.municipio} ${p.refSubasta} ${p.direccion} ${p.entidad}`.toLowerCase().includes(q))return false;
+    if(pr&&p.provincia!==pr)return false;if(rk!==''&&c.lvl!=+rk)return false;if(mx&&c.precio>mx)return false;if(es&&p.estado!==es)return false;return true});
+}
+function daysTo(d){if(!d)return NaN;return Math.ceil((new Date(d)-new Date(new Date().toDateString()))/864e5)}
+function render(){
+  const s=$('#fSort').value;
+  const items=filtered().map(p=>({p,c:calc(p)}));
+  const key={fin:x=>{const d=daysTo(x.p.fin);return isFinite(d)&&d>=0?d:1e9},neta:x=>-(x.c.neta||-9),flip:x=>-(isFinite(x.c.flip)?x.c.flip:-9),desc:x=>-(isFinite(x.c.desc)?x.c.desc:-9),precio:x=>x.c.precio,riesgo:x=>x.c.score}[s];
+  items.sort((a,b)=>key(a)-key(b));
+  $('#count').textContent=P.length?`${items.length} de ${P.length} inmuebles`:'';
+  if(!P.length){$('#list').innerHTML=`<div class="empty"><h3>Aún no tienes inmuebles guardados</h3><p>Añade el primero desde un anuncio del Portal de Subastas del BOE o de un servicer. Pega el enlace, el municipio y los importes y la ficha calcula costes, riesgo y rentabilidad.</p><div class="links" style="justify-content:center"><button class="btn pri" data-act="new">+ Nuevo inmueble</button><button class="btn" data-act="demo">Cargar 3 ejemplos</button></div></div>`}
+  else $('#list').innerHTML=items.map(({p,c})=>{const d=daysTo(p.fin);const url=safeUrl(p.url);
+    return`<article class="card${sel===p.id?' sel':''}" data-id="${esc(p.id)}">
+    <div class="top"><div><h3>${p.fav?'★ ':''}${esc(p.titulo||'Sin título')}</h3><div class="meta">${esc(p.tipo||'')} · ${esc(p.municipio||'Sin municipio')}${p.provincia?' ('+esc(p.provincia)+')':''} · ${esc(p.origen||'')}</div></div>
+    <div class="price">${eur(c.precio)}<small>${num(p.puja)?'tu puja prevista':'puja estimada'}</small></div></div>
+    <div class="tags"><span class="tag r${c.lvl}">Riesgo ${LV[c.lvl].toLowerCase()} · ${c.score}</span><span class="tag">${esc(p.estado||'Vigilando')}</span><span class="tag">${esc(REF[p.reforma]||'')}</span>${p.ocupacion==='ocupado'?'<span class="tag r2">Ocupado</span>':''}${isFinite(d)?`<span class="tag${d>=0&&d<=7?' r1':''}">${d<0?'Cerrada':d===0?'Cierra hoy':'Cierra en '+d+' d'}</span>`:''}${p.demo?'<span class="tag">Ejemplo</span>':''}</div>
+    <div class="nums"><div><b>${pct(c.neta)}</b>rent. neta</div><div><b>${c.renta?eur(c.mes):'–'}</b>neto / mes</div><div><b>${pct(c.flip)}</b>margen venta</div><div><b>${pct(c.desc)}</b>descuento</div></div>
+    <div class="cardacts">${url?`<a class="btn" href="${esc(url)}" target="_blank" rel="noopener" data-stop>Ver subasta ↗</a>`:''}<button class="btn" data-act="fav" data-id="${esc(p.id)}">${p.fav?'Quitar ★':'★ Favorito'}</button><button class="btn" data-act="loc" data-id="${esc(p.id)}">Ver en mapa</button></div></article>`}).join('');
+  // KPIs
+  $('#k1').textContent=P.length;
+  const act=P.filter(p=>!['Perdida','Descartada'].includes(p.estado)).map(p=>({p,c:calc(p)}));
+  $('#k2').textContent=act.length?eur(act.reduce((a,x)=>a+x.c.inv,0)):'–';
+  const best=act.filter(x=>x.c.renta).sort((a,b)=>b.c.neta-a.c.neta)[0];$('#k3').textContent=best?pct(best.c.neta):'–';
+  const nx=act.map(x=>({x,d:daysTo(x.p.fin)})).filter(o=>o.d>=0).sort((a,b)=>a.d-b.d)[0];$('#k4').textContent=nx?(nx.d===0?'Hoy':nx.d+' días'):'–';
+  drawPins();
+}
+['#fQ','#fProv','#fRisk','#fMax','#fEst','#fSort'].forEach(s=>$(s).addEventListener('input',render));
+$('#list').addEventListener('click',async e=>{
+  if(e.target.closest('[data-stop]'))return;
+  const b=e.target.closest('[data-act]');
+  if(b){e.stopPropagation();const a=b.dataset.act,p=P.find(x=>x.id===b.dataset.id);
+    if(a==='new')return openEd(null);if(a==='demo')return loadDemo();
+    if(a==='fav'){const n={...p,fav:!p.fav};await save(n);return}
+    if(a==='loc'){if(!p.lat)return toast('Este inmueble no tiene ubicación');sel=p.id;const[x,y]=proj(p.lon,p.lat);const w=VB0.w/6;vb={x:x-w/2,y:y-vb.h*(w/vb.w)/2,w,h:vb.h*(w/vb.w)};applyVB();render();if(innerWidth<900)$('.mapwrap').scrollIntoView({behavior:'smooth'});return}}
+  const c=e.target.closest('.card');if(c)openEd(c.dataset.id)});
+
+/* ---------- editor ---------- */
+const F=[
+ ['Identificación',[['titulo','Título','text','w2'],['tipo','Tipo','sel:'+TIPOS.join('|')],['origen','Origen','sel:'+ORIGEN.join('|')],['entidad','Juzgado / entidad / servicer','text'],['refSubasta','Referencia (p. ej. SUB-JA-…)','text'],
+   ['url','Enlace directo a la subasta','url','w2'],['url2','Otro enlace (anuncio, catastro…)','url'],['estado','Estado del proceso','sel:'+ESTADOS.join('|')],['fin','Fecha de cierre','date'],['refCat','Referencia catastral','text']]],
+ ['Ubicación',[['municipio','Municipio','muni','w2'],['direccion','Dirección','text'],['zona','Zona / barrio (libre)','text'],['latlon','Coordenadas','loc','w2']]],
+ ['Inmueble y subasta',[['m2','Superficie m²','num'],['hab','Habitaciones','num'],['anio','Año construcción','num'],
+   ['valorSubasta','Valor de subasta €','num'],['tasacion','Valor de tasación €','num'],['puja','Tu puja prevista €','num'],
+   ['valorRef','Valor de referencia catastral €','num'],['valorMercado','Valor de mercado estimado €','num'],['vm2','€/m² de la zona (ayuda)','num'],
+   ['reforma','Reforma estimada','sel:'+Object.keys(REF).join('|')],['reformaManual','Reforma: importe propio €','num'],['ocupacion','Ocupación','sel:libre|ocupado|desconocido'],
+   ['cargas','Cargas previas que asumes €','num'],['deudas','Deudas IBI / comunidad €','num'],['visitado','¿Visitado por dentro?','sel:no|si'],['notaSimple','¿Nota simple revisada?','sel:no|si']]],
+ ['Alquiler',[['renta','Renta mensual estimada €','num'],['ibi','IBI anual €','num'],['comunidad','Comunidad €/mes','num']]],
+ ['Notas',[['notas','Notas, riesgos detectados, próximos pasos','area','w3']]]
+];
+const BLANK={titulo:'',tipo:'Piso',origen:'Judicial (BOE)',estado:'Vigilando',reforma:'media',ocupacion:'desconocido',visitado:'no',notaSimple:'no',contactos:[],reformaManual:''};
+function openEd(id){const p=id?P.find(x=>x.id===id):null;editing=p?structuredClone(p):{...structuredClone(BLANK),id:newId()};editing._new=!p;sel=editing.id;$('#bDel').style.display=p?'':'none';$('#ovEd').classList.add('on');renderEditor();$('#ai')&&($('#ai').style.display='none')}
+function newId(){try{return crypto.randomUUID()}catch{return'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,8)}}
+function fieldHtml([k,l,t,w]){const v=editing[k]??'';
+  if(t.startsWith('sel:'))return`<div class="f ${w||''}"><label for="e_${k}">${l}</label><select id="e_${k}" name="${k}">${t.slice(4).split('|').map(o=>`<option value="${esc(o)}"${o===v?' selected':''}>${esc(k==='reforma'?REF[o]:o==='si'?'Sí':o==='no'?'No':o[0].toUpperCase()+o.slice(1))}</option>`).join('')}</select></div>`;
+  if(t==='area')return`<div class="f ${w||''}"><label for="e_${k}">${l}</label><textarea id="e_${k}" name="${k}">${esc(v)}</textarea></div>`;
+  if(t==='muni')return`<div class="f ${w||''}"><label for="e_${k}">${l}</label><input id="e_${k}" name="${k}" list="munis" value="${esc(v)}" placeholder="Escribe y elige de la lista"><div class="hint" id="muniHint">${editing.provincia?'Provincia: '+esc(editing.provincia):'Al elegir un municipio se sitúa en el mapa'}</div></div>`;
+  if(t==='loc')return`<div class="f ${w||''}"><label>${l}</label><div class="links" style="margin:0"><span class="hint" style="align-self:center">${editing.lat?editing.lat+', '+editing.lon:'Sin ubicar'}</span><button type="button" class="btn" id="bPick">Ajustar en el mapa</button>${editing.lat?`<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps?q=${+editing.lat},${+editing.lon}">Google Maps ↗</a>`:''}</div></div>`;
+  return`<div class="f ${w||''}"><label for="e_${k}">${l}</label><input id="e_${k}" name="${k}" ${t==='num'?'type="text" inputmode="decimal"':t==='date'?'type="date"':t==='url'?'type="url" placeholder="https://…"':'type="text"'} value="${esc(v)}">${k==='valorRef'?'<div class="hint">El ITP se calcula sobre el mayor entre precio y este valor. Confírmalo con tu asesor.</div>':k==='vm2'?'<div class="hint">Si lo rellenas, calcula el valor de mercado con los m².</div>':''}</div>`}
+function renderEditor(){
+  $('#edTitle').textContent=editing._new?'Nuevo inmueble':(editing.titulo||'Inmueble');
+  const cts=(editing.contactos||[]).map((c,i)=>`<div class="contact" data-i="${i}"><input placeholder="Nombre" data-c="nombre" value="${esc(c.nombre)}"><select data-c="rol">${ROLES.map(r=>`<option${r===c.rol?' selected':''}>${r}</option>`).join('')}</select><input placeholder="Teléfono" data-c="tel" value="${esc(c.tel)}"><input placeholder="Email" data-c="email" value="${esc(c.email)}"><input placeholder="Notas" data-c="notas" value="${esc(c.notas)}"><button type="button" class="btn" data-rm="${i}" aria-label="Quitar contacto">✕</button></div>`).join('');
+  $('#edFields').innerHTML=F.map(([t,fs])=>`<fieldset><legend>${t}</legend><div class="grid">${fs.map(fieldHtml).join('')}</div>${t==='Identificación'?linkRow():''}</fieldset>`).join('')
+   +`<fieldset><legend>Contactos</legend><p class="hint" style="margin-top:0">Juzgado, administrador concursal, gestor del servicer, agente… Guarda teléfono y email para llamar antes de pujar.</p>${cts}<button type="button" class="btn" id="bAddC">+ Añadir contacto</button></fieldset>`
+   +`<datalist id="munis">${GEO?GEO.munis.map(m=>`<option value="${esc(m[1])}">`).join(''):''}</datalist>`;
+  renderRes();
+}
+function linkRow(){const u=safeUrl(editing.url),u2=safeUrl(editing.url2);return(u||u2)?`<div class="links">${u?`<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">Abrir subasta ↗</a>`:''}${u2?`<a class="btn" href="${esc(u2)}" target="_blank" rel="noopener">Abrir otro enlace ↗</a>`:''}</div>`:''}
+function renderRes(){const c=calc(editing);
+  $('#edRes').innerHTML=`<div class="big"><h3>Si alquilas</h3><div class="hero" style="margin-top:10px"><div><b>${c.renta?pct(c.neta):'–'}</b><span>rentabilidad neta anual</span></div><div><b>${c.renta?eur(c.mes):'–'}</b><span>beneficio neto al mes</span></div></div>
+   <div class="rows"><div class="row"><span>Rentabilidad bruta</span><b>${c.renta?pct(c.bruta):'–'}</b></div><div class="row"><span>Renta anual</span><b>${eur(c.rentaA)}</b></div><div class="row"><span>Gastos anuales (IBI, comunidad, seguro, mant.)</span><b>${eur(c.gastosA)}</b></div><div class="row"><span>Vacío supuesto</span><b>${S.vacio} %</b></div></div>
+   ${c.renta?'':'<p class="hint">Añade la renta mensual estimada para ver la rentabilidad.</p>'}</div>
+   <div class="big"><h3>Si reformas y vendes</h3><div class="hero" style="margin-top:10px"><div><b>${pct(c.flip)}</b><span>margen sobre inversión</span></div><div><b>${c.vm?eur(c.plus):'–'}</b><span>beneficio antes de IRPF</span></div></div>
+   <div class="rows"><div class="row"><span>Descuento compra vs. mercado</span><b>${pct(c.desc)}</b></div><div class="row"><span>Costes de venta (${S.venta} %)</span><b>${eur(c.vm*S.venta/100)}</b></div></div></div>
+   <div class="big"><h3>Inversión total</h3><div class="rows">
+   <div class="row"><span>Precio de adjudicación${num(editing.puja)?'':' (est. '+S.pujaPct+' % del valor de subasta)'}</span><b>${eur(c.precio)}</b></div>
+   <div class="row"><span>ITP${S.granTenedor==='si'?' (20 % gran tenedor)':' por tramos'} sobre ${eur(c.baseItp)}</span><b>${eur(c.tax)}</b></div>
+   <div class="row"><span>Notaría, registro, gestoría y asesor</span><b>${eur(c.gastos)}</b></div><div class="row"><span>Reforma</span><b>${eur(c.reforma)}</b></div>
+   <div class="row"><span>Desalojo / posesión</span><b>${eur(c.desalojo)}</b></div><div class="row"><span>Cargas + deudas</span><b>${eur(c.cargas+c.deudas)}</b></div>
+   <div class="row tot"><span>Total</span><b>${eur(c.inv)}</b></div></div>
+   ${num(editing.valorSubasta)?`<p class="hint">Depósito para pujar en el BOE (5 % del valor de subasta): <b>${eur(c.deposito)}</b></p>`:''}</div>
+   <div class="big"><h3>Riesgo ${LV[c.lvl].toLowerCase()} · ${c.score}/100</h3><div class="meter"><i style="width:${c.score}%;background:${LC[c.lvl]}"></i></div>
+   ${c.f.length?`<ul class="factors">${c.f.sort((a,b)=>b[0]-a[0]).map(([v,t])=>`<li>${esc(t)} (+${v})</li>`).join('')}</ul>`:'<p class="hint">Sin factores de riesgo marcados.</p>'}
+   <p class="hint">Puntuación orientativa a partir de lo que has marcado. No sustituye revisar la certificación de cargas ni el edicto.</p></div>
+   <div class="big" id="aiBox" style="display:none"><h3>Valoración de Claude</h3><div class="ai" id="ai"></div><div class="links" id="aiActs"></div></div>`;
+}
+$('#edForm').addEventListener('input',e=>{const t=e.target;
+  if(t.dataset.c){const i=+t.closest('.contact').dataset.i;editing.contactos[i][t.dataset.c]=t.value;return}
+  if(!t.name)return;editing[t.name]=t.value;
+  if(t.name==='municipio'){const m=GEO&&GEO.munis.find(x=>x[1].toLowerCase()===t.value.trim().toLowerCase());if(m){editing.municipio=m[1];editing.ineCode=m[0];editing.provincia=PROV[m[0].slice(0,2)];editing.lon=m[2];editing.lat=m[3];$('#muniHint').textContent='Provincia: '+editing.provincia+' · situado en el mapa'}}
+  if((t.name==='vm2'||t.name==='m2')&&num(editing.vm2)&&num(editing.m2)){editing.valorMercado=String(Math.round(num(editing.vm2)*num(editing.m2)));const vmI=$('#e_valorMercado');if(vmI)vmI.value=editing.valorMercado}
+  if(t.name==='titulo')$('#edTitle').textContent=t.value||'Inmueble';
+  renderRes()});
+$('#edForm').addEventListener('change',e=>{if(['municipio','url','url2'].includes(e.target.name)){const y=$('.ov.on')?.scrollTop;renderEditor();if(y!=null)$('#ovEd').scrollTop=y}});
+$('#edForm').addEventListener('submit',e=>e.preventDefault());
+$('#edForm').addEventListener('click',e=>{
+  if(e.target.id==='bAddC'){(editing.contactos ||= []).push({nombre:'',rol:ROLES[0],tel:'',email:'',notas:''});renderEditor();return}
+  if(e.target.dataset.rm!=null){editing.contactos.splice(+e.target.dataset.rm,1);renderEditor();return}
+  if(e.target.id==='bPick'){picking=true;$('#ovEd').classList.remove('on');svg.classList.add('pick');$('#pickmsg').style.display='block';if(innerWidth<900)$('.mapwrap').scrollIntoView();return}
+  if(e.target.dataset.apply){applyAI();return}});
+$('#bCancel').onclick=()=>{$('#ovEd').classList.remove('on');editing=null;render()};
+$('#bSave').onclick=async()=>{const p={...editing};delete p._new;if(!p.titulo)p.titulo=(p.tipo||'Inmueble')+(p.municipio?' en '+p.municipio:'');await save(p);$('#ovEd').classList.remove('on');editing=null;toast('Guardado')};
+let delArm=false;
+$('#bDel').onclick=async()=>{if(!delArm){delArm=true;$('#bDel').textContent='Pulsa otra vez para eliminar';setTimeout(()=>{delArm=false;$('#bDel').textContent='Eliminar'},3500);return}
+  delArm=false;$('#bDel').textContent='Eliminar';await remove(editing.id);$('#ovEd').classList.remove('on');editing=null;toast('Eliminado')};
+
+/* ---------- Claude ---------- */
+let aiSug=null;
+$('#bAI').onclick=async()=>{
+  const sample=await (window.claude?.use?.('sample')??null);const box=$('#aiBox'),out=$('#ai');box.style.display='block';out.style.display='block';$('#aiActs').innerHTML='';
+  if(!sample){out.textContent='La valoración con Claude no está disponible en esta vista.';return}
+  const d={...editing};delete d.contactos;delete d._new;
+  const prompt=`Eres analista de inversión inmobiliaria en Catalunya, experto en subastas (BOE judicial/notarial, AEAT, Seguridad Social) y activos de servicers bancarios. Valora este inmueble de forma prudente. Datos (JSON, introducidos por el usuario):\n${JSON.stringify(d)}\n\nResponde SOLO con un JSON con estas claves:\n{"reforma":"bueno|ligera|media|integral","reforma_eur":número,"renta_mensual":número (alquiler de mercado realista en ese municipio),"valor_mercado":número (precio de venta realista tras reformar),"eur_m2_zona":número,"riesgos":[frases cortas],"comentario":"3-5 frases: puntos clave, qué comprobar antes de pujar (certificación de cargas, ocupación, deudas, edicto) y si el precio tiene sentido"}\nSi falta información, haz la mejor estimación razonable e indícalo en el comentario. Ten en cuenta que en Catalunya hay zonas con alquiler regulado (zonas tensionadas).`;
+  out.textContent='Pensando…';$('#bAI').disabled=true;
+  try{const r=await sample(prompt,{modelTier:'default',onText:({text})=>{out.textContent=text}});
+    const m=r.text.match(/\{[\s\S]*\}/);aiSug=m?JSON.parse(m[0]):null;
+    if(!aiSug){out.textContent=r.text;return}
+    out.textContent=`Reforma: ${REF[aiSug.reforma]||aiSug.reforma} (~${eur(aiSug.reforma_eur)})\nAlquiler estimado: ${eur(aiSug.renta_mensual)}/mes\nValor de mercado: ${eur(aiSug.valor_mercado)} (${eur(aiSug.eur_m2_zona)}/m²)\n\nRiesgos:\n• ${(aiSug.riesgos||[]).join('\n• ')}\n\n${aiSug.comentario||''}\n\nEstimación orientativa: contrástala con testigos reales de la zona.`;
+    $('#aiActs').innerHTML='<button type="button" class="btn pri" data-apply="1">Aplicar estimaciones a la ficha</button>';
+  }catch(err){out.textContent=err&&err.code==='rate_limited'?'Demasiadas peticiones; prueba en un minuto.':'No se pudo obtener la valoración ('+(err&&err.code||'error')+').'}
+  finally{$('#bAI').disabled=false}};
+function applyAI(){if(!aiSug)return;const a=aiSug;
+  if(REF[a.reforma])editing.reforma=a.reforma;if(a.reforma_eur)editing.reformaManual=String(Math.round(a.reforma_eur));
+  if(a.renta_mensual&&!num(editing.renta))editing.renta=String(Math.round(a.renta_mensual));
+  if(a.valor_mercado&&!num(editing.valorMercado))editing.valorMercado=String(Math.round(a.valor_mercado));
+  if(a.eur_m2_zona&&!num(editing.vm2))editing.vm2=String(Math.round(a.eur_m2_zona));
+  const note=`[Claude ${new Date().toLocaleDateString('es-ES')}] ${a.comentario||''} Riesgos: ${(a.riesgos||[]).join('; ')}`;editing.notas=(editing.notas?editing.notas+'\n\n':'')+note;
+  renderEditor();toast('Estimaciones aplicadas (no sobrescriben renta ni valor que ya tuvieras)')}
+
+/* ---------- supuestos ---------- */
+const SF=[['pujaPct','Puja por defecto (% del valor de subasta)'],['gastosPct','Notaría + registro + gestoría (% precio)'],['asesor','Abogado / asesor (€ fijo)'],['ref_ligera','Reforma ligera (€/m²)'],['ref_media','Reforma media (€/m²)'],['ref_integral','Reforma integral (€/m²)'],['desalojo','Coste desalojo si ocupado (€)'],['vacio','Vacío anual (%)'],['mant','Mantenimiento (% renta)'],['seguro','Seguro anual (€)'],['venta','Costes de venta (% precio)'],['granTenedor','¿Eres gran tenedor? (ITP 20 %)']];
+function openSet(){$('#setFields').innerHTML=SF.map(([k,l])=>k==='granTenedor'?`<div class="f w2"><label for="s_${k}">${l}</label><select id="s_${k}"><option value="no"${S[k]!=='si'?' selected':''}>No</option><option value="si"${S[k]==='si'?' selected':''}>Sí</option></select></div>`:`<div class="f"><label for="s_${k}">${l}</label><input id="s_${k}" inputmode="decimal" value="${esc(S[k])}"></div>`).join('');$('#ovSet').classList.add('on')}
+$('#bSet').onclick=openSet;
+$('#bSaveSet').onclick=async()=>{const n={...S};SF.forEach(([k])=>{const v=$('#s_'+k).value;n[k]=k==='granTenedor'?v:num(v)});S=n;
+  try{if(setDoc)await setDoc.set(n);else lsSave()}catch(e){toast('No se pudo guardar')}$('#ovSet').classList.remove('on');render();toast('Supuestos guardados')};
+
+/* ---------- fuentes ---------- */
+const SRC=[['Portal de Subastas del BOE','https://subastas.boe.es/','Subastas judiciales, notariales y de administraciones (incluida la AEAT). Filtra por provincia: Barcelona, Girona, Lleida, Tarragona.'],
+ ['Agencia Tributaria · subastas','https://sede.agenciatributaria.gob.es/Sede/deudas-apremios-embargos-subastas/subastas.html','Información y buscador de inmuebles que subasta Hacienda a través del portal del BOE.'],
+ ['Solvia','https://www.solvia.es/','Servicer de Intrum; integra los antiguos catálogos de Haya Real Estate.'],
+ ['Altamira Inmuebles','https://www.altamirainmuebles.com/','Grupo doValue; activos de Santander y otras entidades.'],
+ ['Aliseda Inmobiliaria','https://www.alisedainmobiliaria.com/','Servicer de Blackstone y Santander.'],
+ ['Servihabitat','https://www.servihabitat.com/','Activos de CaixaBank y otras carteras.']];
+$('#srcList').innerHTML=SRC.map(([n,u,d])=>`<a href="${u}" target="_blank" rel="noopener">${n} ↗<span>${d}</span></a>`).join('')+'<p class="hint">Cuando encuentres uno interesante, copia su enlace y pulsa “Nuevo inmueble”.</p>';
+$('#bSrc').onclick=()=>$('#ovSrc').classList.add('on');
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.ov').classList.remove('on'));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const o=[...document.querySelectorAll('.ov.on')].pop();if(o&&o.id!=='ovEd')o.classList.remove('on')}});
+$('#bNew').onclick=()=>openEd(null);
+
+/* ---------- export / import ---------- */
+$('#bIO').onclick=()=>$('#ovIO').classList.add('on');
+const copy=async t=>{try{await navigator.clipboard.writeText(t);toast('Copiado al portapapeles')}catch{$('#ioTxt').value=t;$('#ioTxt').select();toast('Selecciona y copia el texto')}};
+$('#bCopyJ').onclick=()=>copy(JSON.stringify({version:1,supuestos:S,inmuebles:P},null,1));
+$('#bCopyC').onclick=()=>{const cols=['titulo','tipo','municipio','provincia','origen','estado','fin','url','valorSubasta','puja','m2','renta','valorMercado'];
+  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';copy([...cols,'inversion','rent_neta','neto_mes','margen_venta','riesgo'].join(';')+'\n'+P.map(p=>{const c=calc(p);return[...cols.map(k=>q(p[k])),Math.round(c.inv),(c.neta*100).toFixed(2),Math.round(c.mes),isFinite(c.flip)?(c.flip*100).toFixed(2):'',c.score].join(';')}).join('\n'))};
+$('#bImp').onclick=async()=>{try{const d=JSON.parse($('#ioTxt').value);const arr=Array.isArray(d)?d:d.inmuebles;if(!Array.isArray(arr))throw 0;
+  for(const p of arr){if(p&&typeof p==='object'){const c={...p,id:typeof p.id==='string'&&/^[\w.~:@+-]{1,80}$/.test(p.id)?p.id:newId()};await save(c,true)}}render();toast(arr.length+' inmuebles importados')}catch{toast('JSON no válido')}};
+
+/* ---------- datos ---------- */
+function lsSave(){try{localStorage.setItem('subastasCat',JSON.stringify({S,P}))}catch{}}
+async function save(p,quiet){p.updated=new Date().toISOString();const i=P.findIndex(x=>x.id===p.id);
+  if(propsCol){try{await propsCol.doc(p.id).set(JSON.parse(JSON.stringify(p)))}catch(e){toast(e&&e.code==='quota_exceeded'?'Has llegado al límite de almacenamiento':'No se pudo guardar');return}}
+  if(i>=0)P[i]=p;else P.push(p);if(!propsCol)lsSave();if(!quiet)render()}
+async function remove(id){if(propsCol){try{await propsCol.doc(id).delete()}catch{toast('No se pudo eliminar');return}}P=P.filter(x=>x.id!==id);if(!propsCol)lsSave();render()}
+async function loadDemo(){const g=n=>GEO.munis.find(m=>m[1]===n);const mk=(n,o)=>{const m=g(n);return{...structuredClone(BLANK),id:newId(),demo:true,municipio:m[1],ineCode:m[0],provincia:PROV[m[0].slice(0,2)],lon:m[2],lat:m[3],url:'https://subastas.boe.es/',...o}};
+  const t=new Date();const dt=d=>new Date(t.getTime()+d*864e5).toISOString().slice(0,10);
+  const D=[mk('Sabadell',{titulo:'Piso 3 hab. Can Oriach (ejemplo)',m2:'78',hab:'3',anio:'1972',valorSubasta:'142000',tasacion:'165000',valorMercado:'175000',renta:'950',ibi:'380',comunidad:'45',reforma:'media',ocupacion:'libre',deudas:'2400',fin:dt(9),estado:'Analizando',entidad:'Juzgado 1ª Instancia nº 3 de Sabadell',contactos:[{nombre:'LAJ del juzgado',rol:'Juzgado / LAJ',tel:'',email:'',notas:'Pedir edicto y certificación de cargas'}]}),
+   mk('Figueres',{titulo:'Casa adosada para reformar (ejemplo)',tipo:'Casa / chalet',origen:'Hacienda / AEAT',m2:'132',hab:'4',valorSubasta:'118000',valorMercado:'210000',renta:'1100',ibi:'520',reforma:'integral',ocupacion:'desconocido',fin:dt(21),estado:'Vigilando'}),
+   mk('Reus',{titulo:'Local comercial en planta baja (ejemplo)',tipo:'Local',origen:'Banco / servicer',entidad:'Servicer',m2:'95',valorSubasta:'64000',puja:'58000',valorMercado:'92000',renta:'650',ibi:'410',comunidad:'30',reforma:'ligera',ocupacion:'libre',visitado:'si',notaSimple:'si',fin:dt(4),estado:'Pujar'})];
+  for(const p of D)await save(p,true);render();toast('Ejemplos cargados: puedes editarlos o borrarlos')}
+function banner(t){const b=$('#banner');b.textContent=t;b.style.display=t?'block':'none'}
+async function initData(){
+  const [d,u]=await Promise.all([window.claude?.use?.('db')??null,window.claude?.use?.('user')??null]);
+  if(d&&u)uid=await u.id();
+  if(!d||!uid){try{const s=JSON.parse(localStorage.getItem('subastasCat')||'null');if(s){S={...DEF,...s.S};P=s.P||[]}}catch{}
+    banner('Modo local: los datos solo se guardan en este navegador. Abre la página desde claude.ai con tu cuenta para guardarlos en la nube.');render();return}
+  db=d;const base=db.doc('data/users/'+uid+'/profile');propsCol=base.collection('props');setDoc=db.doc('data/users/'+uid+'/settings');
+  try{const s=await setDoc.get();if(s.exists)S={...DEF,...s.data()}}catch{}
+  const timer=setTimeout(()=>banner('Aún no se pueden cargar tus datos; reintentando…'),10000);
+  propsCol.onSnapshot(snap=>{if(!snap.metadata.fromCache){clearTimeout(timer);banner('')}P=snap.docs.map(x=>({...x.data(),id:x.id}));if(!editing)render();else drawPins()},err=>{clearTimeout(timer);banner(err&&err.code==='revoked'?'Acceso a los datos retirado.':'No se pudieron cargar los datos.')});
+}
+fetch('catalunya.json').then(r=>r.json()).then(g=>{GEO=g;drawBase();render()}).catch(()=>banner('No se pudo cargar el mapa.'));
+render();
+initData();
+}
+</script>
+</body>
+</html>
