@@ -1,0 +1,82 @@
+{
+  "fuente": "Portal de Subastas del BOE (subastas.boe.es)",
+  "consultado": "2026-11-24",
+  "criterio": "Bienes inmuebles en estado 'Celebrándose' o 'Próxima apertura' en la provincia de Barcelona (CP del distrito de Sants-Montjuïc y alrededores) y en la provincia de Lleida (La Seu d'Urgell y Alt Urgell). Coordenadas aproximadas.",
+  "inmuebles": [
+    {
+      "id": "boe-SUB-JA-2026-267575",
+      "titulo": "Piso 3 hab. 86 m² · Mare de Déu del Port 371",
+      "tipo": "Piso", "origen": "Judicial (BOE)", "entidad": "Sección Civil TI Barcelona, plaza nº 33 · Exp. 1539/24",
+      "refSubasta": "SUB-JA-2026-267575", "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-267575",
+      "estado": "Analizando", "fin": "2026-12-10", "refCat": "8096817DF2789E0290OJ",
+      "municipio": "Barcelona", "ineCode": "08019", "provincia": "Barcelona",
+      "direccion": "C/ Mare de Déu del Port 371-373, esc. D, 3º 4ª (CP 08038)", "zona": "Sants-Montjuïc · La Marina de Port",
+      "lat": 41.3585, "lon": 2.1395,
+      "m2": "86.5", "hab": "3", "valorSubasta": "167870.92",
+      "reforma": "media", "reformaManual": "", "ocupacion": "desconocido", "visitado": "no", "notaSimple": "no",
+      "contactos": [{"nombre": "Sección Civil TI Barcelona, plaza 33", "rol": "Juzgado / LAJ", "tel": "", "email": "", "notas": "Cuenta expediente 0621 0000 06 1539 24"}],
+      "notas": "BOE 24/11/2026. Subasta judicial en vía de apremio, del 20/11 al 10/12/2026 a las 18:00. Valor de subasta 167.870,92 €, sin puja mínima, depósito 8.393,55 €, tramos de 3.357,42 €. Cantidad reclamada 126.135,17 €. Posesión: no consta. No visitable. No es vivienda habitual. Cargas: las de la certificación de cargas (revisar). Recibidor, comedor-estar, 3 dormitorios, cocina, baño, aseo y galería.",
+      "detectada": "2026-11-24"
+    },
+    {
+      "id": "boe-SUB-JC-2026-267092",
+      "titulo": "4,53 % indiviso de piso entresuelo · Begur 41-43 (Sants)",
+      "tipo": "Piso", "origen": "Concursal", "entidad": "Sección Civil TI Barcelona, plaza nº 2 · Exp. 0315/03",
+      "refSubasta": "SUB-JC-2026-267092", "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JC-2026-267092",
+      "estado": "Vigilando", "fin": "", "refCat": "7308719DF2870G0003YQ",
+      "municipio": "Barcelona", "ineCode": "08019", "provincia": "Barcelona",
+      "direccion": "C/ Begur 41-43, entresuelo (CP 08028)", "zona": "Sants-Montjuïc · Sants-Badal",
+      "lat": 41.3732, "lon": 2.1307,
+      "m2": "49.56", "hab": "2", "valorSubasta": "6000", "puja": "1000",
+      "reforma": "bueno", "reformaManual": "", "ocupacion": "ocupado", "visitado": "no", "notaSimple": "no",
+      "contactos": [{"nombre": "Administración concursal (ver edicto)", "rol": "Administrador concursal", "tel": "", "email": "", "notas": "Subasta concursal, exp. 0315/03"}],
+      "notas": "OJO: se subasta solo una parte indivisa del 4,53 % del piso, no el piso entero. Próxima apertura (sin fecha de cierre todavía). Valor 6.000 €, puja mínima 1.000 €, depósito 300 €. Arrendado con contrato de 25/03/2019 (ocupantes con derecho a permanecer). Útil solo si te interesa comprar participaciones.",
+      "detectada": "2026-11-24"
+    },
+    {
+      "id": "boe-SUB-JA-2026-261887",
+      "titulo": "Plaza de aparcamiento nº 32 · Regent Mendieta 14-20",
+      "tipo": "Garaje / trastero", "origen": "Judicial (BOE)", "entidad": "Sección Social TI Barcelona, plaza nº 5 · Exp. 0844/25",
+      "refSubasta": "SUB-JA-2026-261887", "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-261887",
+      "estado": "Vigilando", "fin": "2026-11-30", "refCat": "6711121DF2861B0032JS",
+      "municipio": "Barcelona", "ineCode": "08019", "provincia": "Barcelona",
+      "direccion": "C/ Regent Mendieta 14-20, planta baja (CP 08028)", "zona": "Límite Sants / Les Corts",
+      "lat": 41.3794, "lon": 2.1239,
+      "m2": "3.5", "valorSubasta": "9514.04", "tasacion": "9514.04",
+      "reforma": "bueno", "reformaManual": "0", "ocupacion": "desconocido", "visitado": "no", "notaSimple": "no",
+      "contactos": [],
+      "notas": "Subasta judicial (jurisdicción social), del 10/11 al 30/11/2026 a las 18:00. Valor y tasación 9.514,04 €, sin puja mínima, depósito 1.902,81 €. Plaza pequeña: 2,10 × 1,65 m (válida solo para moto). Registro de la Propiedad de Sants. Posesión: no consta.",
+      "detectada": "2026-11-24"
+    },
+    {
+      "id": "boe-SUB-JA-2026-268646",
+      "titulo": "Piso 5º 2ª · Llançà 38-40 (junto a Plaça d'Espanya)",
+      "tipo": "Piso", "origen": "Judicial (BOE)", "entidad": "Sección Civil TI Barcelona, plaza nº 46 · Exp. 1776/24",
+      "refSubasta": "SUB-JA-2026-268646", "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-268646",
+      "estado": "Vigilando", "fin": "2026-12-09", "refCat": "8714615DF2881D0076FQ",
+      "municipio": "Barcelona", "ineCode": "08019", "provincia": "Barcelona",
+      "direccion": "C/ Llançà 38-40, esc. B, 5º 2ª (CP 08015)", "zona": "Eixample (Nova Esquerra), colindante con Hostafrancs",
+      "lat": 41.3766, "lon": 2.1484,
+      "valorSubasta": "567433.61",
+      "reforma": "media", "reformaManual": "", "ocupacion": "desconocido", "visitado": "no", "notaSimple": "no",
+      "contactos": [],
+      "notas": "Fuera del distrito de Sants-Montjuïc por muy poco (lado Eixample de la calle Tarragona); lo incluyo porque está pegado a Hostafrancs. Del 19/11 al 09/12/2026 a las 18:00. Valor de subasta 567.433,61 €, sin puja mínima, depósito 28.371,68 €. Cantidad reclamada 186.665,81 €. Superficie no indicada en el anuncio: consultarla en catastro con la referencia.",
+      "detectada": "2026-11-24"
+    },
+    {
+      "id": "boe-SUB-JA-2026-267971",
+      "titulo": "Casa 'Rectoria' 140 m² · Fígols d'Organyà (Alt Urgell)",
+      "tipo": "Casa / chalet", "origen": "Judicial (BOE)", "entidad": "Sec. Civil e Instrucción TI La Seu d'Urgell, plaza nº 1 · Exp. 0035/21",
+      "refSubasta": "SUB-JA-2026-267971", "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-267971",
+      "estado": "Vigilando", "fin": "", "refCat": "3038804CG6733N0001MR",
+      "municipio": "Fígols i Alinyà", "ineCode": "25908", "provincia": "Lleida",
+      "direccion": "C/ Major s/n, Fígols d'Organyà (CP 25794)", "zona": "Alt Urgell · a unos 25 km de La Seu d'Urgell",
+      "lat": 42.1951, "lon": 1.3972,
+      "m2": "140", "valorSubasta": "500000",
+      "reforma": "integral", "reformaManual": "", "ocupacion": "desconocido", "visitado": "no", "notaSimple": "no",
+      "contactos": [{"nombre": "Juzgado de La Seu d'Urgell, plaza 1", "rol": "Juzgado / LAJ", "tel": "", "email": "", "notas": "Exp. 0035/21"}],
+      "notas": "La única subasta activa del partido judicial de La Seu d'Urgell; ninguna dentro del propio municipio. Próxima apertura (sin fecha de cierre todavía). Valor de subasta 500.000 €, sin puja mínima, depósito 25.000 €. Cantidad reclamada 226.941,97 €. Casa antigua de bajos, dos pisos y desván. Valor muy alto para la zona: comprobar tasación y estado.",
+      "detectada": "2026-11-24"
+    }
+  ]
+}
