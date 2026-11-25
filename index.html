@@ -278,7 +278,7 @@ const ro=new ResizeObserver(()=>{if(vb)applyVB()});ro.observe(svg);
 function filtered(){
   const q=$('#fQ').value.trim().toLowerCase(),pr=$('#fProv').value,rk=$('#fRisk').value,mx=num($('#fMax').value),es=$('#fEst').value;
   return P.filter(p=>{const c=calc(p);
-    if(q&&!`${p.titulo} ${p.municipio} ${p.refSubasta} ${p.direccion} ${p.entidad}`.toLowerCase().includes(q))return false;
+    if(q&&!`${p.titulo} ${p.municipio} ${p.refSubasta} ${p.direccion} ${p.entidad} ${p.zona}`.toLowerCase().includes(q))return false;
     if(pr&&p.provincia!==pr)return false;if(rk!==''&&c.lvl!=+rk)return false;if(mx&&c.precio>mx)return false;if(es&&p.estado!==es)return false;return true});
 }
 function daysTo(d){if(!d)return NaN;return Math.round((new Date(d+'T00:00')-new Date(new Date().toDateString()))/864e5)}
