@@ -1040,7 +1040,7 @@
   },
   {
    "id": "boe-SUB-JA-2026-267943",
-   "titulo": "Piso 95 m² · C/ Pare Coll 15, 4º 3ª (Girona)",
+   "titulo": "Piso 83 m² útiles, 4º 3ª · C/ Pare Coll 15 (Eixample, Girona)",
    "tipo": "Piso",
    "origen": "Judicial (BOE)",
    "entidad": "Sección Civil TI Girona, plaza 4 · Exp. 0427/20",
@@ -1053,15 +1053,15 @@
    "ineCode": "17079",
    "provincia": "Girona",
    "direccion": "C/ Pare Coll 15, 4º 3ª (CP 17005)",
-   "zona": "Girona · Sant Narcís / Santa Eugènia",
+   "zona": "Girona · Eixample",
    "lat": 41.97845,
    "lon": 2.81206,
    "m2": "95",
    "anio": "1977",
    "valorSubasta": "123234.4",
-   "valorMercado": "218000",
-   "vm2": "2300",
-   "renta": "930",
+   "valorMercado": "237500",
+   "vm2": "2500",
+   "renta": "950",
    "ibi": "430",
    "comunidad": "40",
    "reforma": "media",
@@ -1073,15 +1073,23 @@
     {
      "nombre": "Sección Civil TI Girona, plaza 4",
      "rol": "Juzgado / LAJ",
+     "tel": "972 181 714",
+     "email": "sce.civil.equip-d.girona@xij.gencat.cat",
+     "notas": "Av. Ramon Folch 4-6, 17001 Girona. Exp. 0427/20. Cuenta expediente 1672 0000 05 0427 20"
+    },
+    {
+     "nombre": "LSF11 Boson Investments S.à r.l.",
+     "rol": "Otro",
      "tel": "",
      "email": "",
-     "notas": "Exp. 0427/20"
+     "notas": "Acreedor ejecutante (fondo). NIF N0050744B"
     }
    ],
-   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE — próxima apertura. sin fechas aún, Valor de subasta 123.234,40 €. Depósito 6.161,72 €. Deuda reclamada 38.366,27 €. Superficie 95 m² y año 1977 (Catastro). Mercado: Girona 2.814 €/m² (idealista); barrio estimado 2.300. Reforma estimada por antigüedad: media. Alquiler estimado 930 €/mes (superficie alquilable limitada a 90 m²). Próxima apertura: aún sin fechas. 1.297 €/m² de salida en la capital.",
+   "notas": "CUMPLE CRITERIOS. Anuncio BOE-B-2026-38714 (BOE 24/11/2026). Próxima apertura: aún sin fechas; la puja dura 20 días desde que se abre. Valor de subasta 123.234,40 €, sin puja mínima, tramos de 2.464,68 €, depósito 6.161,72 €. Deuda reclamada 38.366,27 €. Acreedor: LSF11 Boson Investments (fondo). Finca registral 2937, Registro de la Propiedad nº 4 de Girona (tomo 3445, libro 252, folio 221). Catastro: 95 m² (83 de vivienda + 12 de zonas comunes), año 1977, cuota 3,271 %. Edificio de 48 inmuebles (23 viviendas, 23 garajes/trasteros, 2 locales) con plantas sótano, baja, entresuelo, 1ª a 4ª y ático. La referencia catastral del BOE tiene una errata (44755004…); la correcta es 4475504DG8447E0044PW. Posesión y visitas: no consta. Mercado: Eixample de Girona, unos 2.300-2.700 €/m²; estimado 2.500. Alquiler estimado 950 €/mes.",
    "candidato": true,
    "detectada": "2026-11-25",
-   "riesgoZona": "no"
+   "riesgoZona": "no",
+   "url2": "https://www1.sedecatastro.gob.es/Cartografia/mapa.aspx?del=17&mun=85&refcat=4475504DG8447E"
   },
   {
    "id": "boe-SUB-JA-2026-267099",
