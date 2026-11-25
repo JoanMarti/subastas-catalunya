@@ -195,7 +195,7 @@ const REF={bueno:'Buen estado (0)',ligera:'Reforma ligera',media:'Reforma media'
 const ROLES=['Juzgado / LAJ','Administrador concursal','Notaría','Banco / servicer','Agente / API','Propietario','Abogado','Otro'];
 const DEF={pujaPct:70,gastosPct:1.5,asesor:1500,ref_ligera:250,ref_media:550,ref_integral:950,desalojo:6000,vacio:5,mant:5,seguro:250,venta:6,granTenedor:'no'};
 let S={...DEF}, P=[], GEO=null, db=null, uid=null, propsCol=null, setDoc=null, editing=null, sel=null;
-ESTADOS.forEach(e=>$('#fEst').insertAdjacentHTML('beforeend',`<option>${e}</option>`));$('#fEst').insertAdjacentHTML('afterbegin','<option value="">Cualquier estado</option>');$('#fEst').value='';
+ESTADOS.forEach(e=>$('#fEst').insertAdjacentHTML('beforeend',`<option>${e}</option>`));$('#fEst').insertAdjacentHTML('afterbegin','<option value="">Cualquier estado</option>');$('#fEst').insertAdjacentHTML('beforeend','<option value="__cand">✓ Solo los que cumplen criterios</option>');$('#fEst').value='';
 
 /* ---------- cálculo ---------- */
 function itp(b){if(S.granTenedor==='si')return b*.20;const t=[[6e5,.10],[9e5,.11],[1.5e6,.12],[Infinity,.13]];let prev=0,tax=0;for(const[l,r]of t){if(b>prev)tax+=(Math.min(b,l)-prev)*r;prev=l}return tax}
@@ -225,6 +225,7 @@ function calc(p){
   const desc=vm?1-precio/vm:NaN;
   add(!vm?10:desc<.15?15:desc<.25?8:0,!vm?'Sin valor de mercado estimado':'Poco descuento sobre mercado');
   add(/Judicial|Concursal/.test(p.origen||'')?5:0,'Procedimiento judicial / concursal');
+  add(p.riesgoZona==='si'?15:0,'Zona conflictiva o con poca demanda de reventa');
   const score=Math.min(100,f.reduce((a,[v])=>a+v,0));
   const lvl=score<30?0:score<55?1:2;
   return{precio,baseItp,tax,gastos,reforma,desalojo,cargas,deudas,inv,renta,rentaA,gastosA,netoA,bruta:rentaA/inv,neta:netoA/inv,mes:netoA/12,vm,plus,flip:vm?plus/inv:NaN,desc,score,lvl,f,deposito:vs*.05};
@@ -279,7 +280,7 @@ function filtered(){
   const q=$('#fQ').value.trim().toLowerCase(),pr=$('#fProv').value,rk=$('#fRisk').value,mx=num($('#fMax').value),es=$('#fEst').value;
   return P.filter(p=>{const c=calc(p);
     if(q&&!`${p.titulo} ${p.municipio} ${p.refSubasta} ${p.direccion} ${p.entidad} ${p.zona}`.toLowerCase().includes(q))return false;
-    if(pr&&p.provincia!==pr)return false;if(rk!==''&&c.lvl!=+rk)return false;if(mx&&c.precio>mx)return false;if(es&&p.estado!==es)return false;return true});
+    if(pr&&p.provincia!==pr)return false;if(rk!==''&&c.lvl!=+rk)return false;if(mx&&c.precio>mx)return false;if(es==='__cand'){if(!p.candidato)return false}else if(es&&p.estado!==es)return false;return true});
 }
 function daysTo(d){if(!d)return NaN;return Math.round((new Date(d+'T00:00')-new Date(new Date().toDateString()))/864e5)}
 function render(){
@@ -293,7 +294,7 @@ function render(){
     return`<article class="card${sel===p.id?' sel':''}" data-id="${esc(p.id)}">
     <div class="top"><div><h3>${p.fav?'★ ':''}${esc(p.titulo||'Sin título')}</h3><div class="meta">${esc(p.tipo||'')} · ${esc(p.municipio||'Sin municipio')}${p.provincia?' ('+esc(p.provincia)+')':''} · ${esc(p.origen||'')}</div></div>
     <div class="price">${eur(c.precio)}<small>${num(p.puja)?'tu puja prevista':'puja estimada'}</small></div></div>
-    <div class="tags"><span class="tag r${c.lvl}">Riesgo ${LV[c.lvl].toLowerCase()} · ${c.score}</span><span class="tag">${esc(p.estado||'Vigilando')}</span><span class="tag">${esc(REF[p.reforma]||'')}</span>${p.ocupacion==='ocupado'?'<span class="tag r2">Ocupado</span>':''}${isFinite(d)?`<span class="tag${d>=0&&d<=7?' r1':''}">${d<0?'Cerrada':d===0?'Cierra hoy':'Cierra en '+d+' d'}</span>`:''}${p.demo?'<span class="tag">Ejemplo</span>':''}</div>
+    <div class="tags"><span class="tag r${c.lvl}">Riesgo ${LV[c.lvl].toLowerCase()} · ${c.score}</span><span class="tag">${esc(p.estado||'Vigilando')}</span><span class="tag">${esc(REF[p.reforma]||'')}</span>${p.ocupacion==='ocupado'?'<span class="tag r2">Ocupado</span>':''}${isFinite(d)?`<span class="tag${d>=0&&d<=7?' r1':''}">${d<0?'Cerrada':d===0?'Cierra hoy':'Cierra en '+d+' d'}</span>`:''}${p.demo?'<span class="tag">Ejemplo</span>':''}${p.candidato?'<span class="tag r0">✓ Cumple criterios</span>':''}</div>
     <div class="nums"><div><b>${c.renta?pct(c.neta):'–'}</b>rent. neta</div><div><b>${c.renta?eur(c.mes):'–'}</b>neto / mes</div><div><b>${pct(c.flip)}</b>margen venta</div><div><b>${pct(c.desc)}</b>descuento</div></div>
     <div class="cardacts">${url?`<a class="btn" href="${esc(url)}" target="_blank" rel="noopener" data-stop>Ver subasta ↗</a>`:''}<button class="btn" data-act="fav" data-id="${esc(p.id)}">${p.fav?'Quitar ★':'★ Favorito'}</button><button class="btn" data-act="loc" data-id="${esc(p.id)}">Ver en mapa</button></div></article>`}).join('');
   // KPIs
@@ -301,7 +302,7 @@ function render(){
   const act=P.filter(p=>!['Perdida','Descartada'].includes(p.estado)).map(p=>({p,c:calc(p)}));
   $('#k2').textContent=act.length?eur(act.reduce((a,x)=>a+x.c.inv,0)):'–';
   const best=act.filter(x=>x.c.renta).sort((a,b)=>b.c.neta-a.c.neta)[0];$('#k3').textContent=best?pct(best.c.neta):'–';
-  const nx=act.map(x=>({x,d:daysTo(x.p.fin)})).filter(o=>o.d>=0).sort((a,b)=>a.d-b.d)[0];$('#k4').textContent=nx?(nx.d===0?'Hoy':nx.d+' días'):'–';
+  const nx=act.map(x=>({x,d:daysTo(x.p.fin)})).filter(o=>o.d>=0).sort((a,b)=>a.d-b.d)[0];$('#k4').textContent=nx?(nx.d===0?'Hoy':nx.d===1?'Mañana':nx.d+' días'):'–';
   drawPins();
 }
 ['#fQ','#fProv','#fRisk','#fMax','#fEst','#fSort'].forEach(s=>$(s).addEventListener('input',render));
@@ -323,11 +324,11 @@ const F=[
    ['valorSubasta','Valor de subasta €','num'],['tasacion','Valor de tasación €','num'],['puja','Tu puja prevista €','num'],
    ['valorRef','Valor de referencia catastral €','num'],['valorMercado','Valor de mercado estimado €','num'],['vm2','€/m² de la zona (ayuda)','num'],
    ['reforma','Reforma estimada','sel:'+Object.keys(REF).join('|')],['reformaManual','Reforma: importe propio €','num'],['ocupacion','Ocupación','sel:libre|ocupado|desconocido'],
-   ['cargas','Cargas previas que asumes €','num'],['deudas','Deudas IBI / comunidad €','num'],['visitado','¿Visitado por dentro?','sel:no|si'],['notaSimple','¿Nota simple revisada?','sel:no|si']]],
+   ['cargas','Cargas previas que asumes €','num'],['deudas','Deudas IBI / comunidad €','num'],['visitado','¿Visitado por dentro?','sel:no|si'],['notaSimple','¿Nota simple revisada?','sel:no|si'],['riesgoZona','¿Zona conflictiva o con poca demanda?','sel:no|si']]],
  ['Alquiler',[['renta','Renta mensual estimada €','num'],['ibi','IBI anual €','num'],['comunidad','Comunidad €/mes','num']]],
  ['Notas',[['notas','Notas, riesgos detectados, próximos pasos','area','w3']]]
 ];
-const BLANK={titulo:'',tipo:'Piso',origen:'Judicial (BOE)',estado:'Vigilando',reforma:'media',ocupacion:'desconocido',visitado:'no',notaSimple:'no',contactos:[],reformaManual:''};
+const BLANK={titulo:'',tipo:'Piso',origen:'Judicial (BOE)',estado:'Vigilando',reforma:'media',ocupacion:'desconocido',visitado:'no',notaSimple:'no',riesgoZona:'no',contactos:[],reformaManual:''};
 function openEd(id){const p=id?P.find(x=>x.id===id):null;editing=p?structuredClone(p):{...structuredClone(BLANK),id:newId()};editing._new=!p;sel=editing.id;$('#bDel').style.display=p?'':'none';$('#ovEd').classList.add('on');renderEditor();$('#ai')&&($('#ai').style.display='none')}
 function newId(){try{return crypto.randomUUID()}catch{return'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,8)}}
 function fieldHtml([k,l,t,w]){const v=editing[k]??'';
@@ -436,8 +437,11 @@ $('#bImp').onclick=async()=>{try{const d=JSON.parse($('#ioTxt').value);const arr
   for(const p of arr){if(p&&typeof p==='object'){const c={...p,id:typeof p.id==='string'&&/^[\w.~:@+-]{1,80}$/.test(p.id)?p.id:newId()};await save(c,true)}}render();toast(arr.length+' inmuebles importados')}catch{toast('JSON no válido')}};
 
 async function loadDet(){try{const d=await (await fetch('data/detectadas.json',{cache:'no-store'})).json();const have=new Set(P.map(p=>p.refSubasta||p.id));let n=0;
-  for(const p of d.inmuebles||[]){if(have.has(p.refSubasta)||have.has(p.id))continue;await save({...structuredClone(BLANK),...p},true);n++}
-  render();toast(n?n+' subastas añadidas (consulta: '+(d.consultado||'')+')':'No hay subastas nuevas')}catch{toast('No se pudo cargar el listado de subastas detectadas')}}
+  let upd=0;for(const p of d.inmuebles||[]){const ex=P.find(x=>(x.refSubasta&&x.refSubasta===p.refSubasta)||x.id===p.id);
+    if(ex){if(p.candidato&&!ex.candidato){const m={...ex,candidato:true};for(const[k,v]of Object.entries(p)){if(m[k]==null||m[k]==='')m[k]=v}
+      if(!String(m.notas||'').includes('CUMPLE CRITERIOS'))m.notas=String(p.notas||'').split(' BOE ')[0]+'\n\n'+(ex.notas||'');await save(m,true);upd++}continue}
+    await save({...structuredClone(BLANK),...p},true);n++}
+  render();toast(n||upd?(n?n+' subastas añadidas':'')+(n&&upd?' · ':'')+(upd?upd+' actualizadas con análisis':'')+' (consulta: '+(d.consultado||'')+')':'No hay subastas nuevas')}catch{toast('No se pudo cargar el listado de subastas detectadas')}}
 $('#bDet').onclick=loadDet;
 /* ---------- datos ---------- */
 function lsSave(){try{localStorage.setItem('subastasCat',JSON.stringify({S,P}))}catch{}}

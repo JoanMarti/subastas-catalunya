@@ -1,7 +1,7 @@
 {
  "fuente": "Portal de Subastas del BOE (subastas.boe.es)",
  "consultado": "2026-11-25",
- "criterio": "Bienes inmuebles en estado 'Celebrándose' o 'Próxima apertura' con localidad Barcelona (ciudad), Sant Cugat del Vallès (incluye Valldoreix y Mirasol), distrito de Sants-Montjuïc y partido judicial de La Seu d'Urgell. Coordenadas geocodificadas con OpenStreetMap (aproximadas al portal).",
+ "criterio": "Bienes inmuebles en estado 'Celebrándose' o 'Próxima apertura' con localidad Barcelona (ciudad), Sant Cugat del Vallès (incluye Valldoreix y Mirasol), distrito de Sants-Montjuïc y partido judicial de La Seu d'Urgell. Coordenadas geocodificadas con OpenStreetMap (aproximadas al portal). Candidatos de toda Catalunya marcados con 'candidato': vivienda completa, valor de subasta ≤ 350.000 €, ≥ 50 m², municipio con servicios y descuento claro sobre el mercado.",
  "zonas": [
   "Barcelona ciudad",
   "Sant Cugat del Vallès",
@@ -49,7 +49,8 @@
     }
    ],
    "notas": "BOE del 06/11 al 26/11/2026 a las 18:00. Valor de subasta 686.472,86 €. Puja mínima: Sin puja mínima. Depósito: 34.323,64 €. Cantidad reclamada: 77.923,33 €. Posesión: No consta. Visitable: No consta. Vivienda habitual: No. La descripción del BOE solo dice «finca número 38899» (solar): consultar el edicto y el catastro para superficie y edificabilidad.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-RC-2026-0803800110210",
@@ -89,7 +90,8 @@
     }
    ],
    "notas": "BOE del 06/11 al 26/11/2026 a las 18:00. Valor de subasta 2.044.012,27 €, tasación 4.020.775,09 €. Puja mínima: Sin puja mínima. Depósito: 102.200,61 €. Cantidad reclamada: 537.554,51 €. Posesión: No consta. Visitable: No consta. Vivienda habitual: —. Superficie útil 289 m², construida 511,69 m². Tasación 4.020.775 € frente a valor de subasta 2.044.012 € (−49 %). Subasta de recaudación tributaria de la Generalitat.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-263902",
@@ -129,7 +131,8 @@
     }
    ],
    "notas": "BOE del 10/11 al 30/11/2026 a las 18:00. Valor de subasta 81.241,92 €, tasación 115.303,00 €. Puja mínima: Sin puja mínima. Depósito: 4.062,10 €. Cantidad reclamada: 2.289,56 €. Posesión: No consta. Visitable: No consta. Vivienda habitual: —. Semisótano destinado a local comercial o almacén, divisible en dos entidades. Nave grande, otra pequeña y aseo. Deuda reclamada muy baja (2.289,56 €): es posible que se suspenda si el deudor paga.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-265863",
@@ -169,7 +172,8 @@
     }
    ],
    "notas": "BOE del 10/11 al 30/11/2026 a las 18:00. Valor de subasta 189.922,53 €. Puja mínima: Sin puja mínima. Depósito: 9.496,12 €. Cantidad reclamada: 130.150,61 €. Posesión: No consta. Visitable: No consta. Vivienda habitual: —. Finca registral 1306 del Registro nº 3 de Barcelona. Superficie no indicada: consultar catastro.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-267857-L1",
@@ -209,7 +213,8 @@
     }
    ],
    "notas": "BOE del 10/11 al 30/11/2026 a las 18:00. Valor de subasta 250.741,28 €. Puja mínima: Ver lote. Depósito: 12.537,06 €. Cantidad reclamada: 353.584,22 € (toda la subasta). Posesión: No consta. Visitable: No. Vivienda habitual: No. Lote 1 de 2 (se adjudican por separado). 49,08 m² construidos.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-267857-L2",
@@ -249,7 +254,8 @@
     }
    ],
    "notas": "BOE del 10/11 al 30/11/2026 a las 18:00. Valor de subasta 306.461,57 €. Puja mínima: Ver lote. Depósito: 15.323,07 €. Cantidad reclamada: 353.584,22 € (toda la subasta). Posesión: No consta. Visitable: No. Vivienda habitual: No. Lote 2 de 2 (se adjudica por separado). 56,30 m².",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-268213",
@@ -289,7 +295,8 @@
     }
    ],
    "notas": "BOE del 10/11 al 30/11/2026 a las 18:00. Valor de subasta 409.600,00 €. Puja mínima: Sin puja mínima. Depósito: 20.480,00 €. Cantidad reclamada: 6.426.465,98 €. Posesión: No consta. Visitable: No. Vivienda habitual: No. Edificio del sector L'Anònima (calles Orient, Borrell y Monestir). La deuda reclamada (6,4 M€) es de un procedimiento mayor: revisar en la certificación de cargas qué queda tras la adjudicación.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-268311",
@@ -329,7 +336,8 @@
     }
    ],
    "notas": "BOE del 10/11 al 30/11/2026 a las 18:00. Valor de subasta 220.064,48 €. Puja mínima: Sin puja mínima. Depósito: 11.003,22 €. Cantidad reclamada: 159.011,35 €. Posesión: No consta. Visitable: No consta. Vivienda habitual: No. Superficie no indicada: consultar catastro.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-268328",
@@ -369,7 +377,8 @@
     }
    ],
    "notas": "BOE del 10/11 al 30/11/2026 a las 18:00. Valor de subasta 128.625,00 €. Puja mínima: Sin puja mínima. Depósito: 6.431,25 €. Cantidad reclamada: 70.738,42 €. Posesión: No consta. Visitable: No consta. Vivienda habitual: No. La descripción solo está en el edicto adjunto: abrir la pestaña «Bienes» del BOE para ver tipo y superficie.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-268594",
@@ -379,7 +388,7 @@
    "entidad": "Sección Civil TI Barcelona, plaza 24 · Exp. 0296/21",
    "refSubasta": "SUB-JA-2026-268594",
    "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-268594",
-   "estado": "Vigilando",
+   "estado": "Analizando",
    "fin": "2026-12-03",
    "refCat": "3341408DF3834A0015UB",
    "municipio": "Barcelona",
@@ -389,14 +398,14 @@
    "zona": "Sant Martí · Poblenou",
    "lat": 41.40302,
    "lon": 2.20546,
-   "m2": "49",
+   "m2": "54",
    "hab": "3",
    "valorSubasta": "70315",
    "tasacion": "70315",
    "puja": "",
-   "reforma": "media",
+   "reforma": "integral",
    "reformaManual": "",
-   "ocupacion": "desconocido",
+   "ocupacion": "ocupado",
    "visitado": "no",
    "notaSimple": "no",
    "contactos": [
@@ -408,8 +417,16 @@
      "notas": "Exp. 0296/21"
     }
    ],
-   "notas": "BOE del 13/11 al 03/12/2026 a las 18:00. Valor de subasta 70.315,00 €, tasación 70.315,00 €. Puja mínima: Sin puja mínima. Depósito: 3.515,75 €. Cantidad reclamada: 76.075,03 €. Posesión: No consta. Visitable: No consta. Vivienda habitual: Sí. Vivienda habitual del deudor: si se adjudica por debajo del 70 % del valor puede haber mejora de postura. Precio de salida bajo para Poblenou (≈1.435 €/m²): revisar cargas.",
-   "detectada": "2026-11-25"
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026). Mercado: Barcelona 5.254 €/m² (idealista); Poblenou, edificio de 1935, estimado 4.500. Reforma estimada por antigüedad: integral. Alquiler estimado 960 €/mes. 49 m² según registro y 54 según catastro (en el límite del tamaño). Vivienda habitual. 1.302 €/m² de salida en Poblenou: el valor de subasta es una tasación antigua, por eso tanto descuento. BOE del 13/11 al 03/12/2026 a las 18:00. Valor de subasta 70.315,00 €, tasación 70.315,00 €. Puja mínima: Sin puja mínima. Depósito: 3.515,75 €. Cantidad reclamada: 76.075,03 €. Posesión: No consta. Visitable: No consta. Vivienda habitual: Sí. Vivienda habitual del deudor: si se adjudica por debajo del 70 % del valor puede haber mejora de postura. Precio de salida bajo para Poblenou (≈1.435 €/m²): revisar cargas.",
+   "detectada": "2026-11-25",
+   "anio": "1935",
+   "valorMercado": "243000",
+   "vm2": "4500",
+   "renta": "960",
+   "ibi": "240",
+   "comunidad": "50",
+   "candidato": true,
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-268323",
@@ -449,7 +466,8 @@
     }
    ],
    "notas": "BOE del 17/11 al 07/12/2026 a las 18:00. Valor de subasta 235.317,60 €. Puja mínima: Sin puja mínima. Depósito: 11.765,88 €. Cantidad reclamada: 129.990,45 €. Posesión: No consta. Visitable: No consta. Vivienda habitual: Sí. Vivienda habitual del deudor. Descripción solo en el edicto. Valor alto para la zona: comparar con precios de Ciutat Meridiana.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-267999",
@@ -489,7 +507,8 @@
     }
    ],
    "notas": "BOE del 17/11 al 07/12/2026 a las 18:00. Valor de subasta 90.898,88 €. Puja mínima: Sin puja mínima. Depósito: 4.544,94 €. Cantidad reclamada: 30.912,37 €. Posesión: No consta. Visitable: No. Vivienda habitual: No. OJO: solo se subasta el 18,75 % de la finca, no el piso entero.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-267430",
@@ -529,7 +548,8 @@
     }
    ],
    "notas": "BOE del 17/11 al 07/12/2026 a las 18:00. Valor de subasta 162.541,00 €. Puja mínima: Sin puja mínima. Depósito: 8.127,05 €. Cantidad reclamada: 12.929,43 €. Posesión: No consta. Visitable: No consta. Vivienda habitual: Sí. Vivienda habitual. Deuda reclamada baja (12.929 €): posible suspensión si el deudor paga.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-268355",
@@ -569,7 +589,8 @@
     }
    ],
    "notas": "BOE del 17/11 al 07/12/2026 a las 18:00. Valor de subasta 297.306,29 €. Puja mínima: Sin puja mínima. Depósito: 59.461,25 € (20 %). Cantidad reclamada: 184.972,05 €. Posesión: Ocupante desconocido: consta una persona que dice ser inquilina. Visitable: No consta. Vivienda habitual: No. Posible inquilino: comprobar si el contrato es oponible. Depósito del 20 %, no del 5 %.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-268646",
@@ -597,7 +618,8 @@
    "notaSimple": "no",
    "contactos": [],
    "notas": "Fuera del distrito de Sants-Montjuïc por muy poco (lado Eixample de la calle Tarragona); lo incluyo porque está pegado a Hostafrancs. Del 19/11 al 09/12/2026 a las 18:00. Valor de subasta 567.433,61 €, sin puja mínima, depósito 28.371,68 €. Cantidad reclamada 186.665,81 €. Superficie no indicada en el anuncio: consultarla en catastro con la referencia.",
-   "detectada": "2026-11-24"
+   "detectada": "2026-11-24",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JV-2026-269129",
@@ -637,7 +659,8 @@
     }
    ],
    "notas": "BOE del 20/11 al 10/12/2026 a las 18:00. Valor de subasta 877.504,14 €, tasación 877.504,14 €. Puja mínima: 614.252,90 €. Depósito: 43.875,21 €. Cantidad reclamada: 0 €. Posesión: Ocupante desconocido. Visitable: No. Vivienda habitual: No. Venta de un bien decomisado por el Estado (ORGA), sin deuda reclamada. Puja mínima 614.252,90 € (70 %). Terraza de uso exclusivo de 66,13 m² y trastero nº 228. Primera línea de mar.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-268486",
@@ -677,7 +700,8 @@
     }
    ],
    "notas": "BOE del 24/11 al 14/12/2026 a las 18:00. Valor de subasta 220.570,00 €. Puja mínima: Sin puja mínima. Depósito: 11.028,50 €. Cantidad reclamada: 68.375,92 €. Posesión: Ocupado por el demandado (sin derecho a permanecer). Visitable: No consta. Vivienda habitual: Sí. Ocupado por el deudor: tras adjudicar hay que pedir el lanzamiento al juzgado. Vivienda habitual. Edificio del antiguo Patronato.",
-   "detectada": "2026-11-25"
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-267575",
@@ -714,8 +738,16 @@
      "notas": "Cuenta expediente 0621 0000 06 1539 24"
     }
    ],
-   "notas": "BOE 24/11/2026. Subasta judicial en vía de apremio, del 20/11 al 10/12/2026 a las 18:00. Valor de subasta 167.870,92 €, sin puja mínima, depósito 8.393,55 €, tramos de 3.357,42 €. Cantidad reclamada 126.135,17 €. Posesión: no consta. No visitable. No es vivienda habitual. Cargas: las de la certificación de cargas (revisar). Recibidor, comedor-estar, 3 dormitorios, cocina, baño, aseo y galería.",
-   "detectada": "2026-11-24"
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026). Mercado: Barcelona 5.254 €/m² (idealista); La Marina, estimado 3.500. Reforma estimada por antigüedad: media. Alquiler estimado 1250 €/mes. 100 m² en catastro con elementos comunes. No visitable. BOE 24/11/2026. Subasta judicial en vía de apremio, del 20/11 al 10/12/2026 a las 18:00. Valor de subasta 167.870,92 €, sin puja mínima, depósito 8.393,55 €, tramos de 3.357,42 €. Cantidad reclamada 126.135,17 €. Posesión: no consta. No visitable. No es vivienda habitual. Cargas: las de la certificación de cargas (revisar). Recibidor, comedor-estar, 3 dormitorios, cocina, baño, aseo y galería.",
+   "detectada": "2026-11-24",
+   "anio": "1983",
+   "valorMercado": "303000",
+   "vm2": "3500",
+   "renta": "1250",
+   "ibi": "390",
+   "comunidad": "50",
+   "candidato": true,
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JC-2026-267092",
@@ -754,7 +786,8 @@
     }
    ],
    "notas": "OJO: se subasta solo una parte indivisa del 4,53 % del piso, no el piso entero. Próxima apertura (sin fecha de cierre todavía). Valor 6.000 €, puja mínima 1.000 €, depósito 300 €. Arrendado con contrato de 25/03/2019 (ocupantes con derecho a permanecer). Útil solo si te interesa comprar participaciones.",
-   "detectada": "2026-11-24"
+   "detectada": "2026-11-24",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-261887",
@@ -784,7 +817,8 @@
    "notaSimple": "no",
    "contactos": [],
    "notas": "Subasta judicial (jurisdicción social), del 10/11 al 30/11/2026 a las 18:00. Valor y tasación 9.514,04 €, sin puja mínima, depósito 1.902,81 €. Plaza pequeña: 2,10 × 1,65 m (válida solo para moto). Registro de la Propiedad de Sants. Posesión: no consta.",
-   "detectada": "2026-11-24"
+   "detectada": "2026-11-24",
+   "riesgoZona": "no"
   },
   {
    "id": "boe-SUB-JA-2026-267971",
@@ -821,7 +855,503 @@
     }
    ],
    "notas": "La única subasta activa del partido judicial de La Seu d'Urgell; ninguna dentro del propio municipio. Próxima apertura (sin fecha de cierre todavía). Valor de subasta 500.000 €, sin puja mínima, depósito 25.000 €. Cantidad reclamada 226.941,97 €. Casa antigua de bajos, dos pisos y desván. Valor muy alto para la zona: comprobar tasación y estado.",
-   "detectada": "2026-11-24"
+   "detectada": "2026-11-24",
+   "riesgoZona": "no"
+  },
+  {
+   "id": "boe-SUB-JA-2026-268324",
+   "titulo": "Piso 55 m² · Pl. Sis de Juny 5, 3º 1ª (Igualada)",
+   "tipo": "Piso",
+   "origen": "Judicial (BOE)",
+   "entidad": "Sección Civil e Instrucción TI Igualada, plaza 5 · Exp. 1257/24",
+   "refSubasta": "SUB-JA-2026-268324",
+   "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-268324",
+   "estado": "Analizando",
+   "fin": "2026-11-30",
+   "refCat": "6141706CG8064S0007TD",
+   "municipio": "Igualada",
+   "ineCode": "08102",
+   "provincia": "Barcelona",
+   "direccion": "Pl. Sis de Juny 5, 3º 1ª (CP 08700)",
+   "zona": "Igualada · centro",
+   "lat": 41.5794,
+   "lon": 1.6175,
+   "m2": "55",
+   "anio": "1956",
+   "valorSubasta": "33000",
+   "valorMercado": "94000",
+   "vm2": "1700",
+   "renta": "470",
+   "ibi": "250",
+   "comunidad": "40",
+   "reforma": "integral",
+   "reformaManual": "",
+   "ocupacion": "desconocido",
+   "visitado": "no",
+   "notaSimple": "no",
+   "contactos": [
+    {
+     "nombre": "Sección Civil e Instrucción TI Igualada, plaza 5",
+     "rol": "Juzgado / LAJ",
+     "tel": "",
+     "email": "",
+     "notas": "Exp. 1257/24"
+    }
+   ],
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE del 10/11 al 30/11/2026 a las 18:00, Valor de subasta 33.000,00 €. Depósito 1.650,00 €. Deuda reclamada 27.400,28 €. Superficie 55 m² y año 1956 (Catastro). Mercado: Igualada 2.125 €/m² (idealista); ajustado a 1.700 por antigüedad (1956). Reforma estimada por antigüedad: integral. Alquiler estimado 470 €/mes. No es vivienda habitual. Precio de salida 600 €/m²: muy por debajo del mercado. Edificio de 1956, probablemente sin ascensor: reforma integral.",
+   "candidato": true,
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
+  },
+  {
+   "id": "boe-SUB-JA-2026-268979",
+   "titulo": "Piso 77 m² · C/ Romania 5, 1º 4ª (Terrassa)",
+   "tipo": "Piso",
+   "origen": "Judicial (BOE)",
+   "entidad": "Sección Civil TI Terrassa, plaza 2 · Exp. 0742/22",
+   "refSubasta": "SUB-JA-2026-268979",
+   "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-268979",
+   "estado": "Analizando",
+   "fin": "2026-12-09",
+   "refCat": "0090206DF2909G0024RI",
+   "municipio": "Terrassa",
+   "ineCode": "08279",
+   "provincia": "Barcelona",
+   "direccion": "C/ Romania 5, 1º 4ª (CP 08228)",
+   "zona": "Terrassa · bloques de Can Anglada / Montserrat",
+   "lat": 41.53717,
+   "lon": 2.04055,
+   "m2": "77",
+   "anio": "1978",
+   "valorSubasta": "64100",
+   "valorMercado": "123000",
+   "vm2": "1600",
+   "renta": "720",
+   "ibi": "350",
+   "comunidad": "40",
+   "reforma": "media",
+   "reformaManual": "",
+   "ocupacion": "ocupado",
+   "visitado": "no",
+   "notaSimple": "no",
+   "contactos": [
+    {
+     "nombre": "Sección Civil TI Terrassa, plaza 2",
+     "rol": "Juzgado / LAJ",
+     "tel": "",
+     "email": "",
+     "notas": "Exp. 0742/22"
+    }
+   ],
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE del 19/11 al 09/12/2026 a las 18:00, Valor de subasta 64.100,00 €. Depósito 3.205,00 €. Deuda reclamada 26.776,04 €. Superficie 77 m² y año 1978 (Catastro). Mercado: Terrassa 2.161 €/m² (idealista); barrio de bloques, estimado 1.600. Reforma estimada por antigüedad: media. Alquiler estimado 720 €/mes. Vivienda habitual del deudor: probablemente ocupada por él (lanzamiento judicial tras adjudicar). 832 €/m² de salida.",
+   "candidato": true,
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
+  },
+  {
+   "id": "boe-SUB-JA-2026-268239",
+   "titulo": "Piso 147 m² · C/ Mare de Déu del Roser 26, 1º 1ª (Vilanova del Camí)",
+   "tipo": "Piso",
+   "origen": "Judicial (BOE)",
+   "entidad": "Sección Civil e Instrucción TI Igualada, plaza 5 · Exp. 1074/23",
+   "refSubasta": "SUB-JA-2026-268239",
+   "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-268239",
+   "estado": "Analizando",
+   "fin": "2026-11-30",
+   "refCat": "6334410CG8063S0005PJ",
+   "municipio": "Vilanova del Camí",
+   "ineCode": "08307",
+   "provincia": "Barcelona",
+   "direccion": "C/ Mare de Déu del Roser 26, 1º 1ª (CP 08788)",
+   "zona": "Conca d'Òdena, junto a Igualada",
+   "lat": 41.5715,
+   "lon": 1.637,
+   "m2": "147",
+   "anio": "1996",
+   "valorSubasta": "111304.24",
+   "valorMercado": "218000",
+   "vm2": "1481",
+   "renta": "690",
+   "ibi": "660",
+   "comunidad": "40",
+   "reforma": "ligera",
+   "reformaManual": "",
+   "ocupacion": "ocupado",
+   "visitado": "no",
+   "notaSimple": "no",
+   "contactos": [
+    {
+     "nombre": "Sección Civil e Instrucción TI Igualada, plaza 5",
+     "rol": "Juzgado / LAJ",
+     "tel": "",
+     "email": "",
+     "notas": "Exp. 1074/23"
+    }
+   ],
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE del 10/11 al 30/11/2026 a las 18:00, Valor de subasta 111.304,24 €. Depósito 5.565,21 €. Deuda reclamada 66.832,40 €. Superficie 147 m² y año 1996 (Catastro). Mercado: Vilanova del Camí 1.481 €/m² (idealista). Reforma estimada por antigüedad: ligera. Alquiler estimado 690 €/mes (superficie alquilable limitada a 90 m²). Vivienda habitual. 147 m² construidos según catastro (puede incluir anexos). Edificio de 1996: reforma ligera.",
+   "candidato": true,
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
+  },
+  {
+   "id": "boe-SUB-JA-2026-269043",
+   "titulo": "Piso 118 m² · Camí de Palau 11, 3º 3ª (Mollerussa)",
+   "tipo": "Piso",
+   "origen": "Judicial (BOE)",
+   "entidad": "Sección Civil TI Lleida, plaza 4 · Exp. 0822/21",
+   "refSubasta": "SUB-JA-2026-269043",
+   "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-269043",
+   "estado": "Analizando",
+   "fin": "2026-12-14",
+   "refCat": "4314910CG2141N0012UL",
+   "municipio": "Mollerussa",
+   "ineCode": "25137",
+   "provincia": "Lleida",
+   "direccion": "Camí de Palau 11, 3º 3ª (CP 25230)",
+   "zona": "Pla d'Urgell · capital comarcal",
+   "lat": 41.6312,
+   "lon": 0.8946,
+   "m2": "118",
+   "anio": "1978",
+   "valorSubasta": "83291.35",
+   "valorMercado": "148000",
+   "vm2": "1250",
+   "renta": "570",
+   "ibi": "530",
+   "comunidad": "40",
+   "reforma": "media",
+   "reformaManual": "",
+   "ocupacion": "ocupado",
+   "visitado": "no",
+   "notaSimple": "no",
+   "contactos": [
+    {
+     "nombre": "Sección Civil TI Lleida, plaza 4",
+     "rol": "Juzgado / LAJ",
+     "tel": "",
+     "email": "",
+     "notas": "Exp. 0822/21"
+    }
+   ],
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE del 24/11 al 14/12/2026 a las 18:00, Valor de subasta 83.291,35 €. Depósito 4.164,57 €. Deuda reclamada 55.911,54 €. Superficie 118 m² y año 1978 (Catastro). Mercado: Provincia de Lleida 1.486 €/m² (RealAdvisor); Mollerussa estimado 1.250. Reforma estimada por antigüedad: media. Alquiler estimado 570 €/mes (superficie alquilable limitada a 90 m²). Vivienda habitual, no visitable. 118 m² construidos y 95,68 útiles. 706 €/m² de salida.",
+   "candidato": true,
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
+  },
+  {
+   "id": "boe-SUB-JA-2026-267943",
+   "titulo": "Piso 95 m² · C/ Pare Coll 15, 4º 3ª (Girona)",
+   "tipo": "Piso",
+   "origen": "Judicial (BOE)",
+   "entidad": "Sección Civil TI Girona, plaza 4 · Exp. 0427/20",
+   "refSubasta": "SUB-JA-2026-267943",
+   "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-267943",
+   "estado": "Analizando",
+   "fin": "",
+   "refCat": "4475504DG8447E0044PW",
+   "municipio": "Girona",
+   "ineCode": "17079",
+   "provincia": "Girona",
+   "direccion": "C/ Pare Coll 15, 4º 3ª (CP 17005)",
+   "zona": "Girona · Sant Narcís / Santa Eugènia",
+   "lat": 41.97845,
+   "lon": 2.81206,
+   "m2": "95",
+   "anio": "1977",
+   "valorSubasta": "123234.4",
+   "valorMercado": "218000",
+   "vm2": "2300",
+   "renta": "930",
+   "ibi": "430",
+   "comunidad": "40",
+   "reforma": "media",
+   "reformaManual": "",
+   "ocupacion": "desconocido",
+   "visitado": "no",
+   "notaSimple": "no",
+   "contactos": [
+    {
+     "nombre": "Sección Civil TI Girona, plaza 4",
+     "rol": "Juzgado / LAJ",
+     "tel": "",
+     "email": "",
+     "notas": "Exp. 0427/20"
+    }
+   ],
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE — próxima apertura. sin fechas aún, Valor de subasta 123.234,40 €. Depósito 6.161,72 €. Deuda reclamada 38.366,27 €. Superficie 95 m² y año 1977 (Catastro). Mercado: Girona 2.814 €/m² (idealista); barrio estimado 2.300. Reforma estimada por antigüedad: media. Alquiler estimado 930 €/mes (superficie alquilable limitada a 90 m²). Próxima apertura: aún sin fechas. 1.297 €/m² de salida en la capital.",
+   "candidato": true,
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
+  },
+  {
+   "id": "boe-SUB-JA-2026-267099",
+   "titulo": "Piso 63 m² alquilado · Pl. Fèlix Mestre 11, 3º 1ª (Vilafranca)",
+   "tipo": "Piso",
+   "origen": "Judicial (BOE)",
+   "entidad": "Sec. Civil e Instrucción TI Vilafranca, plaza 2 · Exp. 0414/20",
+   "refSubasta": "SUB-JA-2026-267099",
+   "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-267099",
+   "estado": "Analizando",
+   "fin": "2026-11-30",
+   "refCat": "",
+   "municipio": "Vilafranca del Penedès",
+   "ineCode": "08305",
+   "provincia": "Barcelona",
+   "direccion": "Pl. Fèlix Mestre i Nutó 5-11 (portal 11), 3º 1ª (CP 08720)",
+   "zona": "Vilafranca del Penedès",
+   "lat": 41.3446,
+   "lon": 1.693,
+   "m2": "62.75",
+   "anio": "1975",
+   "valorSubasta": "78057.06",
+   "valorMercado": "140000",
+   "vm2": "2225",
+   "renta": "520",
+   "ibi": "280",
+   "comunidad": "40",
+   "reforma": "media",
+   "reformaManual": "",
+   "ocupacion": "ocupado",
+   "visitado": "no",
+   "notaSimple": "no",
+   "contactos": [
+    {
+     "nombre": "Sec. Civil e Instrucción TI Vilafranca, plaza 2",
+     "rol": "Juzgado / LAJ",
+     "tel": "",
+     "email": "",
+     "notas": "Exp. 0414/20"
+    }
+   ],
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE del 10/11 al 30/11/2026 a las 18:00, Valor de subasta 78.057,06 €. Depósito 3.902,85 €. Deuda reclamada 25.833,17 €. Superficie 62.75 m² y año 1975 (Catastro). Mercado: Vilafranca 2.225 €/m², alquiler 9,8 €/m² (idealista). Reforma estimada por antigüedad: media. Alquiler estimado 520 €/mes. Ocupantes con derecho a permanecer: hay un inquilino con contrato. Compras con renta desde el primer día, pero no puedes vender libre ni subir la renta hasta que acabe el contrato. Año de construcción estimado.",
+   "candidato": true,
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
+  },
+  {
+   "id": "boe-SUB-RC-2026-00292",
+   "titulo": "Ático 54 m² · C/ Tramuntana 21, 2º A (Llançà)",
+   "tipo": "Piso",
+   "origen": "Otra administración",
+   "entidad": "XALOC (Diputació de Girona), recaudación tributaria",
+   "refSubasta": "SUB-RC-2026-00292",
+   "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-RC-2026-00292",
+   "estado": "Analizando",
+   "fin": "2026-12-07",
+   "refCat": "2724201EG1922S0019QT",
+   "municipio": "Llançà",
+   "ineCode": "17092",
+   "provincia": "Girona",
+   "direccion": "C/ Tramuntana 21-25 / Guillem de Berguedà 34, esc. A, 2º A (CP 17490)",
+   "zona": "Costa Brava · Llançà",
+   "lat": 42.38308,
+   "lon": 3.15375,
+   "m2": "54",
+   "anio": "1988",
+   "valorSubasta": "85334.45",
+   "valorMercado": "162000",
+   "vm2": "2997",
+   "renta": "550",
+   "ibi": "240",
+   "comunidad": "40",
+   "reforma": "media",
+   "reformaManual": "",
+   "ocupacion": "desconocido",
+   "visitado": "no",
+   "notaSimple": "no",
+   "contactos": [
+    {
+     "nombre": "XALOC (Diputació de Girona), recaudación tributaria",
+     "rol": "Otro",
+     "tel": "",
+     "email": "",
+     "notas": ""
+    }
+   ],
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE del 17/11 al 07/12/2026 a las 18:00, Valor de subasta 85.334,45 €. Depósito 4.266,72 €. Deuda reclamada 8.516,74 €. Superficie 54 m² y año 1988 (Catastro). Mercado: Llançà 2.997 €/m² (idealista); alquiler estimado, muy estacional. Reforma estimada por antigüedad: media. Alquiler estimado 550 €/mes. Subasta por deudas municipales de solo 8.517 €: es probable que se suspenda si el propietario paga. Puja mínima 8.533,45 €. Mercado de segunda residencia.",
+   "candidato": true,
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
+  },
+  {
+   "id": "boe-SUB-JA-2026-268140",
+   "titulo": "Casa 164 m² · Pg. del Parc 4, Can Bargalló (Sant Esteve Sesrovires)",
+   "tipo": "Casa / chalet",
+   "origen": "Judicial (BOE)",
+   "entidad": "Sección Civil e Instrucción TI Martorell, plaza 7 · Exp. 0571/23",
+   "refSubasta": "SUB-JA-2026-268140",
+   "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-268140",
+   "estado": "Analizando",
+   "fin": "2026-11-30",
+   "refCat": "5906602DF0950N0001BS",
+   "municipio": "Sant Esteve Sesrovires",
+   "ineCode": "08221",
+   "provincia": "Barcelona",
+   "direccion": "Pg. del Parc 4, Urb. Can Bargalló (CP 08635)",
+   "zona": "Baix Llobregat · urbanización Can Bargalló",
+   "lat": 41.46028,
+   "lon": 1.87349,
+   "m2": "164",
+   "anio": "1982",
+   "valorSubasta": "195635",
+   "valorMercado": "295000",
+   "vm2": "1800",
+   "renta": "1390",
+   "ibi": "740",
+   "comunidad": "0",
+   "reforma": "media",
+   "reformaManual": "",
+   "ocupacion": "ocupado",
+   "visitado": "no",
+   "notaSimple": "no",
+   "contactos": [
+    {
+     "nombre": "Sección Civil e Instrucción TI Martorell, plaza 7",
+     "rol": "Juzgado / LAJ",
+     "tel": "",
+     "email": "",
+     "notas": "Exp. 0571/23"
+    }
+   ],
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE del 10/11 al 30/11/2026 a las 18:00, Valor de subasta 195.635,00 €. Depósito 9.781,75 €. Deuda reclamada 147.774,02 €. Superficie 164 m² y año 1982 (Catastro). Mercado: Sant Esteve Sesrovires 1.976 €/m² (idealista); casa en urbanización estimado 1.800. Reforma estimada por antigüedad: media. Alquiler estimado 1390 €/mes. Unifamiliar de planta baja (174 m² según registro) en parcela propia. Vivienda habitual del deudor.",
+   "candidato": true,
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
+  },
+  {
+   "id": "boe-SUB-JA-2026-267270",
+   "titulo": "Piso 141 m² · C/ Mossèn Borràs 3, 2º 1ª (Vilanova del Camí)",
+   "tipo": "Piso",
+   "origen": "Judicial (BOE)",
+   "entidad": "Sección Civil e Instrucción TI Igualada, plaza 3 · Exp. 2722/22",
+   "refSubasta": "SUB-JA-2026-267270",
+   "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-267270",
+   "estado": "Analizando",
+   "fin": "2026-11-30",
+   "refCat": "6534704CG8063S0016PW",
+   "municipio": "Vilanova del Camí",
+   "ineCode": "08307",
+   "provincia": "Barcelona",
+   "direccion": "C/ Mossèn Borràs 3, esc. A, 2º 1ª (CP 08788)",
+   "zona": "Conca d'Òdena, junto a Igualada",
+   "lat": 41.57246,
+   "lon": 1.63712,
+   "m2": "141",
+   "anio": "1989",
+   "valorSubasta": "143856.97",
+   "valorMercado": "209000",
+   "vm2": "1481",
+   "renta": "690",
+   "ibi": "630",
+   "comunidad": "40",
+   "reforma": "media",
+   "reformaManual": "",
+   "ocupacion": "ocupado",
+   "visitado": "no",
+   "notaSimple": "no",
+   "contactos": [
+    {
+     "nombre": "Sección Civil e Instrucción TI Igualada, plaza 3",
+     "rol": "Juzgado / LAJ",
+     "tel": "",
+     "email": "",
+     "notas": "Exp. 2722/22"
+    }
+   ],
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE del 10/11 al 30/11/2026 a las 18:00, Valor de subasta 143.856,97 €. Depósito 7.192,84 €. Deuda reclamada 10.647,22 €. Superficie 141 m² y año 1989 (Catastro). Mercado: Vilanova del Camí 1.481 €/m² (idealista). Reforma estimada por antigüedad: media. Alquiler estimado 690 €/mes (superficie alquilable limitada a 90 m²). Deuda reclamada baja (10.647 €): puede suspenderse si el deudor paga. Vivienda habitual.",
+   "candidato": true,
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
+  },
+  {
+   "id": "boe-SUB-JA-2026-268230",
+   "titulo": "Piso 110 m² · C/ València 19-21, esc. B 2º 2ª (Montcada i Reixac)",
+   "tipo": "Piso",
+   "origen": "Judicial (BOE)",
+   "entidad": "Sec. Civil e Instrucción TI Cerdanyola, plaza 8 · Exp. 0010/21",
+   "refSubasta": "SUB-JA-2026-268230",
+   "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-268230",
+   "estado": "Analizando",
+   "fin": "2026-12-03",
+   "refCat": "2241701DF3924A0018MQ",
+   "municipio": "Montcada i Reixac",
+   "ineCode": "08124",
+   "provincia": "Barcelona",
+   "direccion": "C/ València 19-21, esc. B, 2º 2ª (CP 08110)",
+   "zona": "Vallès Occidental · a 15 min de Barcelona",
+   "lat": 41.49361,
+   "lon": 2.18707,
+   "m2": "110",
+   "anio": "1997",
+   "valorSubasta": "148503.12",
+   "valorMercado": "235000",
+   "vm2": "2140",
+   "renta": "990",
+   "ibi": "500",
+   "comunidad": "40",
+   "reforma": "ligera",
+   "reformaManual": "",
+   "ocupacion": "desconocido",
+   "visitado": "no",
+   "notaSimple": "no",
+   "contactos": [
+    {
+     "nombre": "Sec. Civil e Instrucción TI Cerdanyola, plaza 8",
+     "rol": "Juzgado / LAJ",
+     "tel": "",
+     "email": "",
+     "notas": "Exp. 0010/21"
+    }
+   ],
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE del 13/11 al 03/12/2026 a las 18:00, Valor de subasta 148.503,12 €. Depósito 7.425,15 €. Deuda reclamada 74.389,33 €. Superficie 110 m² y año 1997 (Catastro). Mercado: Montcada i Reixac 2.140 €/m² (idealista); alquiler estimado. Reforma estimada por antigüedad: ligera. Alquiler estimado 990 €/mes (superficie alquilable limitada a 90 m²). 90,62 m² según registro, 110 m² según catastro. Edificio de 1997: reforma ligera. No visitable.",
+   "candidato": true,
+   "detectada": "2026-11-25",
+   "riesgoZona": "no"
+  },
+  {
+   "id": "boe-SUB-JA-2026-264455",
+   "titulo": "Piso 78 m² vacío · C/ Mart 10, 1º 1ª (Sant Adrià de Besòs)",
+   "tipo": "Piso",
+   "origen": "Judicial (BOE)",
+   "entidad": "Sección Civil TI Badalona, plaza 6 · Exp. 1323/20",
+   "refSubasta": "SUB-JA-2026-264455",
+   "url": "https://subastas.boe.es/detalleSubasta.php?idSub=SUB-JA-2026-264455",
+   "estado": "Analizando",
+   "fin": "2026-12-07",
+   "refCat": "5058813DF3855G0176MU",
+   "municipio": "Sant Adrià de Besòs",
+   "ineCode": "08194",
+   "provincia": "Barcelona",
+   "direccion": "C/ Mart 10, 1º 1ª (bloque A-5) (CP 08930)",
+   "zona": "Sant Adrià · barrio de La Mina",
+   "lat": 41.4194,
+   "lon": 2.22085,
+   "m2": "78",
+   "anio": "1976",
+   "valorSubasta": "89792.48",
+   "valorMercado": "117000",
+   "vm2": "1500",
+   "renta": "860",
+   "ibi": "350",
+   "comunidad": "40",
+   "reforma": "media",
+   "reformaManual": "",
+   "ocupacion": "libre",
+   "visitado": "no",
+   "notaSimple": "no",
+   "contactos": [
+    {
+     "nombre": "Sección Civil TI Badalona, plaza 6",
+     "rol": "Juzgado / LAJ",
+     "tel": "",
+     "email": "",
+     "notas": "Exp. 1323/20"
+    }
+   ],
+   "notas": "CUMPLE CRITERIOS (análisis 25/11/2026), Subasta BOE del 17/11 al 07/12/2026 a las 18:00, Valor de subasta 89.792,48 €. Depósito 4.489,62 €. Deuda reclamada 76.848,36 €. Superficie 78 m² y año 1976 (Catastro). Mercado: Sant Adrià 3.131 €/m² de media (idealista), pero La Mina es mucho más barato: estimado 1.500. Reforma estimada por antigüedad: media. Alquiler estimado 860 €/mes. Sin ocupantes según el expediente, lo que es poco habitual y muy positivo. La Mina es un barrio con problemas sociales: alquila bien por precio, pero se revende con dificultad.",
+   "candidato": true,
+   "detectada": "2026-11-25",
+   "riesgoZona": "si"
   }
  ]
 }
